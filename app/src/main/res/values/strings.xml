@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HuoPinClientApp</string>
+
+    <string name="title_dianpu">店铺</string>
+    <string name="title_huopin">伙拼</string>
+    <string name="title_kabao">卡包</string>
+    <string name="title_wode">我的</string>
+
+</resources>

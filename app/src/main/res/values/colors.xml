@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--搜索相关色值-->
+    <color name="search_f9eaeb">#f9eaeb</color>
+    <color name="search_ffabb1">#ffabb1</color>
+
+    <color name="search_f2f2f2">#f2f2f2</color>
+    <color name="search_d4d2d2">#d4d2d2</color>
+
+    <color name="search_e8f6f6">#e8f6f6</color>
+    <color name="search_a7f4f4">#a7f4f4</color>
+
+    <color name="search_f8f2ec">#f8f2ec</color>
+    <color name="search_f6cfa8">#f6cfa8</color>
+
+    <!--蓝色-->
+    <color name="textcolor">#0000ff</color>
+    <color name="blue_53a2ed">#53a2ed</color>
+    <color name="blue_00a0e8">#00a0e8</color>
+
+    <!--红色-->
+    <!--主色调-->
+    <color name="red_ff556d">#ff556d</color>
+    <color name="pink">#FF3052</color>
+    <color name="red_ff4b64">#ff4b64</color>
+    <color name="red_e53951">#e53951</color>
+
+    <!--白色-->
+    <color name="pop_EDF1F4">#EDF1F4</color>
+    <color name="btn_red_grey2">#d3d3d3</color>
+    <!--70%透明度的白色-->
+    <color name="white_tffffff">#b2ffffff</color>
+    <color name="white_4c">#4Cffffff</color>
+    <color name="white_f8f8f8">#f8f8f8</color>
+
+    <!--绿色-->
+    <color name="green">#00ff00</color>
+    <color name="green_6fc80e">#6fc80e</color>
+    <color name="green_5fab0c">#5fab0c</color>
+    <!--透明色-->
+    <color name="translucent">#00000000</color>
+    <color name="green_61cbcb">#61cbcb</color>
+
+    <!--灰色-->
+    <color name="full_line_color">#e7e7e7</color>
+    <color name="gray">#666666</color>
+    <color name="grey">#777777</color>
+    <color name="gray_c9c9c9">#c9c9c9</color>
+    <color name="gray_F9F9F9">#F9F9F9</color>
+    <color name="gray_F0F0F0">#F0F0F0</color>
+
+    <color name="red">#FF4081</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="gray_e7e7e7">#e7e7e7</color>
+
+    <!--默认背景色-->
+    <color name="gray_f4f4f4_background">#f4f4f4</color>
+    <color name="gray_898989">#898989</color>
+    <color name="gray_b1b1b1">#b1b1b1</color>
+    <color name="gray_bfbfbf">#bfbfbf</color>
+    <color name="gray_c4c4c4_hint">#c4c4c4</color>
+    <color name="gray_c5c5c5">#c5c5c5</color>
+    <color name="gray_d5d5d5">#d5d5d5</color>
+    <color name="gray_f1f1f1">#f1f1f1</color>
+
+    <color name="hint_text_color">#c5c5c5</color>
+
+    <color name="black_474747">#474747</color>
+    <!--70%透明度的黑色-->
+    <color name="translucence_B2">#B2000000</color>
+    <!--30%透明度的黑色-->
+    <color name="translucence_4C">#4C000000</color>
+    <color name="black_494949">#494949</color>
+
+    <color name="yellow_fa9f34">#fa9f34</color>
+
+</resources>

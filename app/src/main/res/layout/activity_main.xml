@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_F0F0F0"
+    tools:context="com.yunduo.huopinclientapp.MainActivity">
+
+    <!-- 主界面容器 -->
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_1PX"
+        android:background="@color/gray_e7e7e7" />
+
+    <RadioGroup
+        android:id="@+id/main_radio_group"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content" >
+        <RadioButton
+            android:id="@+id/main_shop"
+            style="@style/MainRadionBtn"
+            android:checked="true"
+            android:drawableTop="@drawable/dianpu_selector"
+            android:text="店铺"
+            />
+        <RadioButton
+            android:id="@+id/main_form"
+            style="@style/MainRadionBtn"
+            android:drawableTop="@drawable/huopin_selector"
+            android:text="火拼"
+            />
+        <RadioButton
+            android:id="@+id/main_vip"
+            style="@style/MainRadionBtn"
+            android:drawableTop="@drawable/kabao_selector"
+            android:text="卡包"
+            />
+        <RadioButton
+            android:id="@+id/main_my"
+            style="@style/MainRadionBtn"
+            android:drawableTop="@drawable/wode_selector"
+            android:text="我的"
+            />
+    </RadioGroup>
+</LinearLayout>

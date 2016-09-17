@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    
+    <ImageView
+        android:id="@+id/title_bar_imBg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_100PX"
+        android:background="@color/gray_F9F9F9"
+        />
+
+    <TextView
+        android:id="@+id/title_bar_text"
+        android:textColor="@color/gray"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/DIMEN_15PX"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/DIMEN_10PX"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/DIMEN_40PX"
+        android:text="@string/title_huopin"
+        />
+
+    <ImageView
+        android:id="@+id/my_ic_setting"
+        android:layout_width="@dimen/DIMEN_80PX"
+        android:layout_height="@dimen/DIMEN_80PX"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/DIMEN_15PX"
+        android:src="@mipmap/ic_my_setting"
+        android:layout_marginRight="@dimen/DIMEN_10PX"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <View
+        android:layout_below="@id/title_bar_imBg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_1PX"
+        android:background="@color/gray"
+        />
+
+</RelativeLayout>
