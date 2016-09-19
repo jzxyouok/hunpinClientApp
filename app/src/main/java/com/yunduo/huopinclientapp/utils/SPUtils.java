@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * sharePreferance
  */
-public class SPUtils {
+public final class SPUtils {
 
 	/**
 	 * 保存在手机里面的文件名

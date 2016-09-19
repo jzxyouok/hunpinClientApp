@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.yunduo.huopinclientapp.R;
 import com.yunduo.huopinclientapp.activitys.LoginActivity;
+import com.yunduo.huopinclientapp.activitys.SettingActivity;
 import com.yunduo.huopinclientapp.utils.MyToast;
 
 
@@ -24,7 +25,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private TextView titleTxt;
-    private ImageView imgIc;
+    private ImageView imgIc,icSet;
 
     private TextView btnRegOrlog;
 
@@ -45,25 +46,34 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         titleTxt.setText(R.string.title_wode);
         imgIc = (ImageView) view.findViewById(R.id.my_ic_setting);
         imgIc.setVisibility(View.VISIBLE);
+        icSet = (ImageView) view.findViewById(R.id.my_ic_setting);
 
         btnRegOrlog = (TextView) view.findViewById(R.id.my_btn_reg);
 
         btnRegOrlog.setOnClickListener(this);
+        icSet.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-
             case R.id.my_btn_reg:
                 //判断  当前  是否已经登录  TODO
                 if(true){
                     startActivity(new Intent(getActivity(),LoginActivity.class));
                 }else{
-                    MyToast.ToastIncenter(getActivity(),"当前已经登录");
+                    MyToast.ToastInLow(getActivity(),"当前已经登录");
                 }
                 break;
 
+            case R.id.my_ic_setting:
+                //进入设置界面  TODO
+                if(true){
+                    startActivity(new Intent(getActivity(),SettingActivity.class));
+                }else{
+                    MyToast.ToastInLow(getActivity(),"当前已经登录");
+                }
+                break;
             default:break;
         }
     }

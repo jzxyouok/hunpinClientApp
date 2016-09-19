@@ -37,13 +37,10 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
         btnGetCode = (Button) findViewById(R.id.bt_auth_pwd);
         btnReg = (Button) findViewById(R.id.btn_finish);
 
-
         back.setOnClickListener(this);
         btnGetCode.setOnClickListener(this);
         btnReg.setOnClickListener(this);
-
     }
-
 
     @Override
     public void onClick(View view) {

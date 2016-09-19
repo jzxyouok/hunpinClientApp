@@ -21,10 +21,10 @@ public final class MyToast {
      * @param message
      * @return
      */
-    public static Toast ToastIncenter(Context context,String message){
+    public static void ToastIncenter(Context context,String message){
         Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER,0,0);
-        return  toast;
+        toast.show();
     }
 
     /**
@@ -35,6 +35,7 @@ public final class MyToast {
      */
     public static Toast ToastInLow(Context context,String message){
         Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
+        toast.show();
         return  toast;
     }
 

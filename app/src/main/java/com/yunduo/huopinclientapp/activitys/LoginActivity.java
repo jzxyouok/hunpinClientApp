@@ -5,6 +5,7 @@ import android.app.AppOpsManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,11 +14,12 @@ import android.widget.TextView;
 
 import com.yunduo.huopinclientapp.ActManager;
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.utils.MyToast;
 
 /**
  * 登录界面
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView regTv,account,password;
 
@@ -55,11 +57,37 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.title_back:
                 //返回
-                ActManager.getActivity(LoginActivity.class).finish();
+                finish();
                 break;
 
             case R.id.btn_login:
-                //获取  登录账号和密码  登录账户  TODO
+                //获取  登录账号和密码  登录账户
+                String acc  = account.getText().toString().trim();
+                String pwd = password.getText().toString().trim();
+
+                if(TextUtils.isEmpty(acc)){
+                    MyToast.ToastIncenter(this,"账号不准为空");
+                    return;
+                }
+                if(!acc.matches("")){
+
+                }
+                if(acc.length()<5){
+                    MyToast.ToastIncenter(this,"账号输入不合法！");
+                    return;
+                }
+                if(TextUtils.isEmpty(pwd)){
+                    MyToast.ToastIncenter(this,"账号不准为空!");
+                    return;
+                }
+                if (pwd.length()<6){
+                    MyToast.ToastIncenter(this,"密码不能小于6位！");
+                    return;
+                }
+
+                if(true) { //多加判断一次  防止第三方跳转  确定当前用户未登录
+                    login(acc,pwd);
+                }
 
                 break;
 
@@ -79,5 +107,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             default:
                 break;
         }
+    }
+
+    //普通登录：
+    private void login(String acc, String pwd) {
+        //登陆成功   保存数据  销毁当前 activity
+
     }
 }

@@ -146,6 +146,7 @@
                 android:background="@drawable/btn_authcode_selector"
                 android:textColor="@color/white"
                 />
+
         </RelativeLayout>
     </LinearLayout>
 

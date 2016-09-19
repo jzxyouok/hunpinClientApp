@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yunduo.huopinclientapp.activitys.AboutUSActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_100PX"
+        android:paddingTop="@dimen/DIMEN_25PX"
+        android:paddingBottom="@dimen/DIMEN_25PX"
+        android:background="@color/red_ff556d"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DIMEN_30PX"
+            android:src="@mipmap/title_left" />
+
+        <TextView
+            android:id="@+id/log_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="关于"
+            android:textSize="@dimen/DIMEN_36PX" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="    赵强,18513667437,zhaoq_hero@163.com
+        (本页建议使用webView加载服务器网址)"
+        />
+
+
+</LinearLayout>
