@@ -44,7 +44,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         clearCache.setOnClickListener(this);
         servicPhone.setOnClickListener(this);
         aboutUs.setOnClickListener(this);
-
     }
 
     @Override

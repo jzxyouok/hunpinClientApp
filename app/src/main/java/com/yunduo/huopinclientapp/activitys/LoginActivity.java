@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import com.yunduo.huopinclientapp.ActManager;
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.domain.City;
+import com.yunduo.huopinclientapp.domain.UserData;
+import com.yunduo.huopinclientapp.utils.InputVerfiyUtil;
+import com.yunduo.huopinclientapp.utils.LoginUtil;
 import com.yunduo.huopinclientapp.utils.MyToast;
 
 /**
@@ -26,6 +30,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button logBtn;
 
     private ImageView iconBack,forgetPwd;
+
+
+    private static final int ACTIV_REGISTER = 1; //打开  注册  界面的标识
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,47 +68,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.btn_login:
-                //获取  登录账号和密码  登录账户
+                //获取  登录  账号和  密码  登录账户
                 String acc  = account.getText().toString().trim();
                 String pwd = password.getText().toString().trim();
 
-                if(TextUtils.isEmpty(acc)){
-                    MyToast.ToastIncenter(this,"账号不准为空");
-                    return;
-                }
-                if(!acc.matches("")){
+                InputVerfiyUtil.verfiyPhoneNum(this,acc);
+                InputVerfiyUtil.verfiyPwd(this,pwd);
 
-                }
-                if(acc.length()<5){
-                    MyToast.ToastIncenter(this,"账号输入不合法！");
-                    return;
-                }
-                if(TextUtils.isEmpty(pwd)){
-                    MyToast.ToastIncenter(this,"账号不准为空!");
-                    return;
-                }
-                if (pwd.length()<6){
-                    MyToast.ToastIncenter(this,"密码不能小于6位！");
-                    return;
-                }
-
-                if(true) { //多加判断一次  防止第三方跳转  确定当前用户未登录
+                if(!LoginUtil.isLogin(this)) { //多加判断一次  防止第三方跳转  确定当前用户未登录
                     login(acc,pwd);
+                }else{
+                    MyToast.ToastIncenter(this,"当前已登录");
                 }
 
                 break;
 
             case R.id.title_register:
-                //跳转到注册界面  TODO
-                if(true){ //多加判断一次  防止第三方跳转  确定当前用户未登录
+                //跳转到注册界面
+                if(!LoginUtil.isLogin(this)){ //多加判断一次  防止第三方跳转  确定当前用户未登录
                     startActivity(new Intent(this,RegisterActivity.class));
+                }else{
+                    MyToast.ToastIncenter(this,"请先退出，再注册");
                 }
                 break;
 
             case R.id.return_pwd:
                 //重置密码
-                startActivity(new Intent(this,ForgetActivity.class));
-
+                startActivityForResult(new Intent(this,ForgetActivity.class),ACTIV_REGISTER);
                 break;
 
             default:
@@ -111,7 +104,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //普通登录：
     private void login(String acc, String pwd) {
-        //登陆成功   保存数据  销毁当前 activity
+        //登陆成功   保存数据   销毁当前 activity  网络登录
 
+        UserData userData = new UserData();
+        userData.setPhone("18513667437");
+        userData.setUserCard("412343231245656433");
+        userData.setUserNick("赵强");
+        userData.setUserCity(new City("北京","166.43","35.09"));
+
+        //
+        if(LoginUtil.saveUserLoginData(this, userData)){
+            MyToast.ToastIncenter(this,"登陆成功");
+        }else{
+            MyToast.ToastIncenter(this,"登录失败");
+        }
+    }
+
+    //微信登录   qq第三方登录
+    private void weChatLogin(){
+
+    }
+
+    //微信登录   qq第三方登录
+    private void qqLogin(){
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //判断   注册返回数据  是否成功
+        switch (requestCode){
+            case ACTIV_REGISTER:
+                //注册界面  返回数据
+
+                break;
+
+            default:break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

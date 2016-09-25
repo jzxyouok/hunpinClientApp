@@ -1,5 +1,6 @@
 package com.yunduo.huopinclientapp.activitys;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.asynctasks.RegisterAsyncTask;
+import com.yunduo.huopinclientapp.asynctasks.TaskCallback;
+import com.yunduo.huopinclientapp.asynctasks.TaskResult;
 import com.yunduo.huopinclientapp.configs.URLS;
 import com.yunduo.huopinclientapp.utils.InputVerfiyUtil;
 import com.yunduo.huopinclientapp.utils.MyToast;
 import com.yunduo.huopinclientapp.utils.NetWorkListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -30,23 +37,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText regPhone,regPwd,regPhoneCode;
     private Button btnGetCode,btnReg;
 
-    private static final int FINISH_ACTIVITY = 1;//结束当前 Activity
-    private static final int VERFIY_COMPLETEED = 2; //验证完成
-    private static final int VERFIY_FAIL = 3;//验证失败
+    private static final int VERFIY_COMPLETEED = 1; //验证完成
+    private static final int VERFIY_FAIL = 2;//验证失败
+
+    private static final int REGISTER_SUCCESS = 3;//注册成功
+    private static final int ACCOUNT_REGISTERED = 4;//账号已经被注册
+    private static final int SERVICE_EXCEPTION = 5;//服务器异常
+    private static final int ACC_NOTFORMAT = 6;//账号密码  格式不正确
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch(msg.what){
-                case FINISH_ACTIVITY:
+                case REGISTER_SUCCESS:
+                    MyToast.ToastIncenter(RegisterActivity.this,"注册成功");
                     RegisterActivity.this.finish();
                     break;
+                case ACCOUNT_REGISTERED:
+                    MyToast.ToastIncenter(RegisterActivity.this,"该账号已经被注册");
+                    break;
+                case SERVICE_EXCEPTION:
+                    MyToast.ToastIncenter(RegisterActivity.this,"服务器异常");
+                    break;
+                case ACC_NOTFORMAT:
+                    MyToast.ToastIncenter(RegisterActivity.this,"请注意输入数据格式");
+                    break;
+
                 case VERFIY_COMPLETEED:
-                    MyToast.ToastIncenter(RegisterActivity.this,"开始验证");
+                    MyToast.ToastIncenter(RegisterActivity.this,"已发送验证码");
                     break;
                 case VERFIY_FAIL:
-                    MyToast.ToastIncenter(RegisterActivity.this,"验证失败");
+                    MyToast.ToastIncenter(RegisterActivity.this,"验证码验证失败");
+                    break;
+
+                default:
                     break;
             }
         }
@@ -107,8 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(InputVerfiyUtil.verfiyPhoneNum(this,acc)&&InputVerfiyUtil.verfiyPwd(this,pwd)
                     &&InputVerfiyUtil.verfiyPhoneCode(this,phoneCode)){
                     //验证验证码
-//                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
-                    register(acc,pwd);
+                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
                 }
                 break;
             default:
@@ -133,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if(phone.equals(acc)){
                         //验证成功 z注册信息
-
+                        register(acc,pwd);
                     }else{
                         //验证失败
                         msg.what = VERFIY_FAIL;//验证失败：
@@ -154,8 +178,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //开始注册
     private void register(String acc, String pwd) {
         //服务端注册信息
-
-
+        new RegisterAsyncTask(this,new TaskCallback() {
+            @Override
+            public void onTaskFinished(TaskResult result) {
+                try {
+                    if( result.data != null){
+                        JSONObject str = (JSONObject) result.data;
+                        String resultCode = str.getString("RegisterNormalUserResultCode");
+                        Message msg = new Message();
+                        switch(resultCode){
+                            case "0":
+                                //注册成功
+                                msg.what = REGISTER_SUCCESS;//验证成功  结束当前Activity：
+                                break;
+                            case "-1":
+                                //账号或者密码格式不合法
+                                msg.what = ACC_NOTFORMAT;
+                                break;
+                            case "-2":
+                                //服务器内部异常
+                                msg.what = SERVICE_EXCEPTION;
+                                break;
+                            case "-3":
+                                //该账号已经被注册
+                                msg.what = ACCOUNT_REGISTERED;
+                                break;
+                            default:
+                                break;
+                        }
+                        handler.sendMessage(msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).execute(acc,pwd);
     }
 
     @Override
@@ -164,5 +221,4 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //要在activity销毁时反注册，否侧会造成内存泄漏问题
         SMSSDK.unregisterAllEventHandler();
     }
-
 }

@@ -4,9 +4,8 @@ import android.app.AppOpsManager;
 import android.app.Application;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import cn.smssdk.SMSSDK;
 
@@ -20,7 +19,6 @@ public final class AppAplication extends Application {
 
     public static  AppAplication instance;
     private static Context context;
-    public static RequestQueue requestQueue; //volley的请求队列
 
     public AppAplication(){
         if(null == instance){
@@ -44,17 +42,26 @@ public final class AppAplication extends Application {
         SMSSDK.initSDK(getApplicationContext(), APPKey, APPScrate);
     }
 
-    //获取  请求队列
-    public static RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(context);//初始化Volley
-        }
-        return requestQueue;
-    }
 
     //内存  占用较高时    调用垃圾回收机制
     public void onLowMomory(){
         super.onLowMemory();
         System.gc();
+    }
+
+
+    /**
+     * 获取App安装包信息
+     * @return
+     */
+    public PackageInfo getPackageInfo() {
+        PackageInfo info = null;
+        try {
+            info = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace(System.err);
+        }
+        if(info == null) info = new PackageInfo();
+        return info;
     }
 }

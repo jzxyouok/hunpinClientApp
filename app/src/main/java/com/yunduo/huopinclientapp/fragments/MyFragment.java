@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.yunduo.huopinclientapp.R;
 import com.yunduo.huopinclientapp.activitys.LoginActivity;
 import com.yunduo.huopinclientapp.activitys.SettingActivity;
+import com.yunduo.huopinclientapp.utils.LoginUtil;
 import com.yunduo.huopinclientapp.utils.MyToast;
 
 
@@ -58,22 +59,19 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.my_btn_reg:
-                //判断  当前  是否已经登录  TODO
-                if(true){
+                //判断  当前  是否已经登录
+                if(!LoginUtil.isLogin(getContext())){
                     startActivity(new Intent(getActivity(),LoginActivity.class));
                 }else{
-                    MyToast.ToastInLow(getActivity(),"当前已经登录");
+                    MyToast.ToastInLow(getActivity(),getString(R.string.had_login));
                 }
                 break;
 
             case R.id.my_ic_setting:
-                //进入设置界面  TODO
-                if(true){
-                    startActivity(new Intent(getActivity(),SettingActivity.class));
-                }else{
-                    MyToast.ToastInLow(getActivity(),"当前已经登录");
-                }
+                //进入设置界面
+                startActivity(new Intent(getActivity(),SettingActivity.class));
                 break;
+
             default:break;
         }
     }

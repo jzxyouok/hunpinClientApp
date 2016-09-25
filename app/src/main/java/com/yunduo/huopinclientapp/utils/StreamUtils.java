@@ -36,12 +36,13 @@ public final class StreamUtils {
 		}
 	}
 
+	//读取输入流
 	public static byte[] readStream(InputStream in) throws IOException{
 		byte[] ret  = null;
 		
 		if(in!=null){
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			byte[] buffer = new byte[128];
+			byte[] buffer = new byte[1024];
 			int len;
 			while(true){
 				len = in.read(buffer);

@@ -3,13 +3,14 @@ package com.yunduo.huopinclientapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * sharePreferance
+ * sharePreferance  操作文件
  */
 public final class SPUtils {
 
@@ -47,7 +48,7 @@ public final class SPUtils {
 		} else {
 			editor.putString(key, object.toString());
 		}
-		
+		Log.i("info","---------key-----------"+key+"----"+object.toString());
 		SharedPreferencesCompat.apply(editor);
 	}
 
@@ -115,7 +116,6 @@ public final class SPUtils {
 
 	/**
 	 * 查询某个key是否已经存在
-	 * 
 	 * @param context
 	 * @param key
 	 * @return
@@ -150,11 +150,11 @@ public final class SPUtils {
 	 * 
 	 */
 	private static class SharedPreferencesCompat {
+
 		private static final Method sApplyMethod = findApplyMethod();
 
 		/**
 		 * 反射查找apply的方法
-		 * 
 		 * @return
 		 */
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -164,13 +164,11 @@ public final class SPUtils {
 				return clz.getMethod("apply");
 			} catch (NoSuchMethodException e) {
 			}
-
 			return null;
 		}
 
 		/**
 		 * 如果找到则使用apply执行，否则使用commit
-		 * 
 		 * @param editor
 		 */
 		public static void apply(SharedPreferences.Editor editor) {
@@ -183,6 +181,7 @@ public final class SPUtils {
 			} catch (IllegalAccessException e) {
 			} catch (InvocationTargetException e) {
 			}
+			Log.i("info","提交信息sp");
 			editor.commit();
 		}
 	}
