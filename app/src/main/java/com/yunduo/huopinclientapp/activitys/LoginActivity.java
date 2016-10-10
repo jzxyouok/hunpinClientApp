@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 InputVerfiyUtil.verfiyPhoneNum(this,acc);
                 InputVerfiyUtil.verfiyPwd(this,pwd);
 
-                if(!LoginUtil.isLogin(this)) { //多加判断一次  防止第三方跳转  确定当前用户未登录
+                if(!LoginUtil.isLogin(LoginActivity.this)) { //多加判断一次  防止第三方跳转  确定当前用户未登录
                     login(acc,pwd);
                 }else{
                     MyToast.ToastIncenter(this,"当前已登录");
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.title_register:
                 //跳转到注册界面
-                if(!LoginUtil.isLogin(this)){ //多加判断一次  防止第三方跳转  确定当前用户未登录
+                if(!LoginUtil.isLogin(LoginActivity.this)){ //多加判断一次  防止第三方跳转  确定当前用户未登录
                     startActivity(new Intent(this,RegisterActivity.class));
                 }else{
                     MyToast.ToastIncenter(this,"请先退出，再注册");
@@ -106,15 +106,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login(String acc, String pwd) {
         //登陆成功   保存数据   销毁当前 activity  网络登录
 
+        //TODO  创建异步任务   请求数据
+
         UserData userData = new UserData();
-        userData.setPhone("18513667437");
-        userData.setUserCard("412343231245656433");
-        userData.setUserNick("赵强");
-        userData.setUserCity(new City("北京","166.43","35.09"));
+        userData.setUserAccount("18513667437");
+        userData.setUserName("赵强");
+        userData.setUserCardId("412343231245656433");
+        userData.setCity(new City("北京","166.43","35.09"));
 
         //
-        if(LoginUtil.saveUserLoginData(this, userData)){
+        if(LoginUtil.saveUserLoginData(LoginActivity.this, userData)){
             MyToast.ToastIncenter(this,"登陆成功");
+            finish();//结束  当前activity
         }else{
             MyToast.ToastIncenter(this,"登录失败");
         }
@@ -138,8 +141,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case ACTIV_REGISTER:
                 //注册界面  返回数据
 
-                break;
 
+                break;
             default:break;
         }
     }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/select_head_bg_shape"
+    >
+
+    <TextView
+        android:id="@+id/album"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="相册"
+        android:paddingTop="@dimen/DIMEN_40PX"
+        android:paddingBottom="@dimen/DIMEN_40PX"
+        android:textColor="@drawable/list_selector"
+        android:textSize="@dimen/DIMEN_35PX"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_2PX"
+        android:background="@color/gray_b1b1b1"
+        android:layout_marginLeft="@dimen/DIMEN_20PX"
+        android:layout_marginRight="@dimen/DIMEN_20PX"
+        />
+
+    <TextView
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="我的相机"
+        android:paddingTop="@dimen/DIMEN_40PX"
+        android:paddingBottom="@dimen/DIMEN_40PX"
+        android:textColor="@drawable/list_selector"
+        android:textSize="@dimen/DIMEN_35PX"
+        android:layout_height="wrap_content">
+    </TextView>
+
+</LinearLayout>

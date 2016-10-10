@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:text="选择设置头像方式"
+    android:paddingTop="@dimen/DIMEN_40PX"
+    android:paddingBottom="@dimen/DIMEN_40PX"
+    android:background="@null"
+    android:textColor="@color/black"
+    android:textSize="@dimen/DIMEN_35PX"
+    android:layout_height="match_parent">
+
+</TextView>

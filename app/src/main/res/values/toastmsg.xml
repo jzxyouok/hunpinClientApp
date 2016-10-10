@@ -12,6 +12,7 @@
 
 
     <string name="had_login">当前已经登录</string>
+    <string name="had_no_login">当前未登录</string>
 
 
 </resources>

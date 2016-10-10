@@ -33,10 +33,9 @@ public final class MyToast {
      * @param message
      * @return
      */
-    public static Toast ToastInLow(Context context,String message){
+    public static void ToastInLow(Context context,String message){
         Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
         toast.show();
-        return  toast;
     }
 
 

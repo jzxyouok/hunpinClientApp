@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 import cn.smssdk.SMSSDK;
 
@@ -64,4 +65,5 @@ public final class AppAplication extends Application {
         if(info == null) info = new PackageInfo();
         return info;
     }
+
 }

@@ -34,6 +34,7 @@ public final class SPUtils {
 			fileName = FILE_NAME;
 		}
 		SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+
 		SharedPreferences.Editor editor = sp.edit();
 		if (object instanceof String) {
 			editor.putString(key, (String) object);
@@ -46,9 +47,8 @@ public final class SPUtils {
 		} else if (object instanceof Long) {
 			editor.putLong(key, (Long) object);
 		} else {
-			editor.putString(key, object.toString());
+			editor.putString(key, (String)object);
 		}
-		Log.i("info","---------key-----------"+key+"----"+object.toString());
 		SharedPreferencesCompat.apply(editor);
 	}
 

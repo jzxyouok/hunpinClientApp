@@ -34,7 +34,7 @@ public class BaseActivity extends AppCompatActivity{
         if(keyCode == KeyEvent.KEYCODE_BACK &&
                 event.getAction() == KeyEvent.ACTION_DOWN){
             if((System.currentTimeMillis()-exectTime)>2000){//第一次点击
-                MyToast.ToastInLow(this,"再次点击退出程序").show();
+                MyToast.ToastInLow(this,"再次点击退出程序");
                 exectTime = System.currentTimeMillis();
             }else{
                 finish();

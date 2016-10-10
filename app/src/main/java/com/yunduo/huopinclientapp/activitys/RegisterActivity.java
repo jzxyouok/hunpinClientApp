@@ -132,7 +132,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(InputVerfiyUtil.verfiyPhoneNum(this,acc)&&InputVerfiyUtil.verfiyPwd(this,pwd)
                     &&InputVerfiyUtil.verfiyPhoneCode(this,phoneCode)){
                     //验证验证码
-                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
+//                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
+                    register(acc,pwd); //测试进度条
                 }
                 break;
             default:

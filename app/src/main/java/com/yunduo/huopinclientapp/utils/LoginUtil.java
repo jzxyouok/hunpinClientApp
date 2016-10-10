@@ -38,14 +38,14 @@ public final class LoginUtil {
     public static boolean saveUserLoginData(Context context,UserData userData) {
         //获取 sp文件  内容   判断  当前是否有用户登录
         if(userData!=null){
+            //保存  登录
+            SPUtils.put(context, "isLogin",false);
+            SPUtils.put(context, "userAccount",userData.getUserAccount());
+            SPUtils.put(context, "userName",userData.getUserName());
+            SPUtils.put(context, "userCard",userData.getUserCardId());
 
-            SPUtils.put(context, "isLogin",true);
-            SPUtils.put(context, "userPhone",userData.getPhone());
-            SPUtils.put(context, "userPhone",userData.getUserNick());
-            SPUtils.put(context, "userCard",userData.getUserCard());
-            SPUtils.put(context, "userCityLongItude",userData.getUserCity().getLongItude());
-            SPUtils.put(context, "userCityLatitude",userData.getUserCity().getLatitude());
-
+            SPUtils.put(context, "userCityLongItude",userData.getCity().getLongItude());
+            SPUtils.put(context, "userCityLatitude",userData.getCity().getLatitude());
             return true;
         }
         return false;

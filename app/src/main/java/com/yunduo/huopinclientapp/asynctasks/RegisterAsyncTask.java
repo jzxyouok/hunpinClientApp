@@ -1,8 +1,13 @@
 package com.yunduo.huopinclientapp.asynctasks;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.provider.SyncStateContract;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.yunduo.huopinclientapp.api.ClientApi;
 import com.yunduo.huopinclientapp.configs.URLS;
@@ -21,8 +26,22 @@ public class RegisterAsyncTask extends BaseAsyncTask {
     private  Context context;
 
     public RegisterAsyncTask(Context context, TaskCallback callback) {
-        super(callback);
+        super(context,callback);
         this.context = context;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        //开启   Dialog
+        ProgressBar progressBar  = new ProgressBar(context);
+        //整个Activity布局的最终父布局,参见参考资料
+        FrameLayout.LayoutParams layoutParams=
+                new FrameLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+
+        layoutParams.gravity= Gravity.CENTER;
+        progressBar.setLayoutParams(layoutParams);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
