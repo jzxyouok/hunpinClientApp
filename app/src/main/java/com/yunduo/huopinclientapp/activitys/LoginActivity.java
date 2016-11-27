@@ -1,24 +1,28 @@
 package com.yunduo.huopinclientapp.activitys;
 
-import android.app.Activity;
-import android.app.AppOpsManager;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.yunduo.huopinclientapp.ActManager;
 import com.yunduo.huopinclientapp.R;
-import com.yunduo.huopinclientapp.domain.City;
+import com.yunduo.huopinclientapp.asynctasks.LoginAsyncTask;
+import com.yunduo.huopinclientapp.asynctasks.TaskCallback;
+import com.yunduo.huopinclientapp.asynctasks.TaskResult;
 import com.yunduo.huopinclientapp.domain.UserData;
+import com.yunduo.huopinclientapp.utils.ActionBarManager;
 import com.yunduo.huopinclientapp.utils.InputVerfiyUtil;
 import com.yunduo.huopinclientapp.utils.LoginUtil;
 import com.yunduo.huopinclientapp.utils.MyToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 登录界面
@@ -29,7 +33,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button logBtn;
 
-    private ImageView iconBack,forgetPwd;
+    private ImageView iconBack;
+
+    private TextView forgetPwd;
 
 
     private static final int ACTIV_REGISTER = 1; //打开  注册  界面的标识
@@ -37,7 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_viphuopin);
+
+        ActionBarManager.getInstance().initSystemBarTran(true,this,R.color.login_actionbar_color);
 
         initView();
     }
@@ -47,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         account = (TextView) findViewById(R.id.et_phone_number);
         password = (TextView) findViewById(R.id.et_pwd);
 
-        forgetPwd = (ImageView) findViewById(R.id.return_pwd);
+        forgetPwd = (TextView) findViewById(R.id.return_pwd);
         logBtn = (Button) findViewById(R.id.btn_login);
         iconBack = (ImageView) findViewById(R.id.title_back);
 
@@ -61,9 +69,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         //注册界面
         switch(view.getId()){
-
+            //---
             case R.id.title_back:
-                //返回
+//                //返回
                 finish();
                 break;
 
@@ -72,13 +80,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String acc  = account.getText().toString().trim();
                 String pwd = password.getText().toString().trim();
 
-                InputVerfiyUtil.verfiyPhoneNum(this,acc);
-                InputVerfiyUtil.verfiyPwd(this,pwd);
-
-                if(!LoginUtil.isLogin(LoginActivity.this)) { //多加判断一次  防止第三方跳转  确定当前用户未登录
+                if(InputVerfiyUtil.verfiyPhoneNum(this,acc) && InputVerfiyUtil.verfiyPwd(this,pwd) &&
+                        !LoginUtil.isLogin(LoginActivity.this)) { //多加判断一次  防止第三方跳转  确定当前用户未登录
                     login(acc,pwd);
-                }else{
-                    MyToast.ToastIncenter(this,"当前已登录");
                 }
 
                 break;
@@ -102,36 +106,92 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private static final int LOGIN_SUCCESS =0 ;
+    private static final int ACCOUNT_NO_EXIST =1 ;
+    private static final int PWD_IS_WRONG =2;
+    private static final int ACCANDPWD_ISNOT_NULL =3 ;
+    private static final int LOGIN_FAIL =4 ;
+
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch(msg.what){
+                case LOGIN_SUCCESS:
+                    MyToast.ToastIncenter(LoginActivity.this,"登陆成功");
+                    finish();  //结束当前线程
+                    break;
+                case ACCOUNT_NO_EXIST:
+                    MyToast.ToastIncenter(LoginActivity.this,"账户不存在");
+                    break;
+                case PWD_IS_WRONG:
+                    MyToast.ToastIncenter(LoginActivity.this,"密码错误");
+                    break;
+                case ACCANDPWD_ISNOT_NULL:
+                    MyToast.ToastIncenter(LoginActivity.this,"不准为空");
+                    break;
+                case LOGIN_FAIL:
+                    MyToast.ToastIncenter(LoginActivity.this,"登录失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
     //普通登录：
     private void login(String acc, String pwd) {
         //登陆成功   保存数据   销毁当前 activity  网络登录
+        new LoginAsyncTask(this,new TaskCallback(){
+            @Override
+            public void onTaskFinished(TaskResult result) {
+                try {
+                    Message msg = new Message();
+                    if( result.data != null){
+                        JSONArray array = (JSONArray) result.data;
+                        JSONObject obj = array.getJSONObject(0);
+                        String resultCode = obj.getString("resultCode");
+                        switch(resultCode){
+                            case "0":
+                                //注册成功
+                                JSONArray dataArray = obj.getJSONArray("data");
+                                JSONObject userJson = dataArray.getJSONObject(0);
+                                //解析当前对象
+                                UserData user = UserData.getUserLoginData(userJson);
+                                if(LoginUtil.saveUserLoginData(LoginActivity.this,user))
+                                    msg.what = LOGIN_SUCCESS;//验证成功  结束当前Activity：
+                                else
+                                    msg.what = LOGIN_FAIL;//保存失败
+                                break;
+                            case "-1":
+                                //登陆账号  不存在
+                                msg.what = ACCOUNT_NO_EXIST;
+                                break;
+                            case "-2":
+                                //登陆密码不正确
+                                msg.what = PWD_IS_WRONG;
+                                break;
+                            case "-3":
+                                //登陆账号  和密码不可为空
+                                msg.what = ACCANDPWD_ISNOT_NULL;
+                                break;
+                            default:
+                                break;
+                        }
 
-        //TODO  创建异步任务   请求数据
+                    }else{
+                        msg.what = LOGIN_FAIL;
+                    }
+                    handler.sendMessage(msg);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-        UserData userData = new UserData();
-        userData.setUserAccount("18513667437");
-        userData.setUserName("赵强");
-        userData.setUserCardId("412343231245656433");
-        userData.setCity(new City("北京","166.43","35.09"));
-
-        //
-        if(LoginUtil.saveUserLoginData(LoginActivity.this, userData)){
-            MyToast.ToastIncenter(this,"登陆成功");
-            finish();//结束  当前activity
-        }else{
-            MyToast.ToastIncenter(this,"登录失败");
-        }
+        }).execute(acc,pwd);
     }
 
-    //微信登录   qq第三方登录
-    private void weChatLogin(){
-
-    }
-
-    //微信登录   qq第三方登录
-    private void qqLogin(){
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -139,8 +199,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //判断   注册返回数据  是否成功
         switch (requestCode){
             case ACTIV_REGISTER:
-                //注册界面  返回数据
-
+                //注册界面  成功  返回数据
 
                 break;
             default:break;

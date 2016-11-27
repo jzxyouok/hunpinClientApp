@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.yunduo.huopinclientapp.ActManager;
+import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.utils.ActionBarManager;
 import com.yunduo.huopinclientapp.utils.MyToast;
 
 /**
@@ -18,6 +20,8 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //透明状态栏
+
         ActManager.getActManager().addActivity(this);
     }
 

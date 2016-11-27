@@ -42,8 +42,8 @@ public class IndexActivity extends BaseActivity {
         iv_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((Boolean) SPUtils.get(IndexActivity.this, FIRST_ENTER, true)){
-                    SPUtils.put(IndexActivity.this, FIRST_ENTER, false);
+                if((Boolean) SPUtils.get_CFG(IndexActivity.this, FIRST_ENTER, true)){
+                    SPUtils.put_CFG(IndexActivity.this, FIRST_ENTER, false);
                 }
                 ActManager.getActManager().openActivity(IndexActivity.this, MainActivity.class,null);
                 finish();

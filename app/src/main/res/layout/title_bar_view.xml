@@ -15,14 +15,11 @@
         android:id="@+id/title_bar_text"
         android:textColor="@color/gray"
         android:layout_centerInParent="true"
-        android:layout_marginStart="@dimen/DIMEN_15PX"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="@dimen/DIMEN_10PX"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/DIMEN_40PX"
-        android:text="@string/title_huopin"
+        android:text="@string/Call_Call"
         />
 
     <ImageView

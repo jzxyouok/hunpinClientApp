@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activitys.RegisterActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_400PX"
+        android:paddingTop="@dimen/DIMEN_25PX"
+        android:paddingBottom="@dimen/DIMEN_25PX"
+        android:background="#12B5B0"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/reg_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DIMEN_30PX"
+            android:src="@mipmap/title_left" />
+
+        <TextView
+            android:id="@+id/log_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:text="注册"
+            android:textSize="@dimen/DIMEN_36PX" />
+
+        <ImageView
+            android:layout_below="@id/log_title_text"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/DIMEN_200PX"
+            android:layout_height="@dimen/DIMEN_200PX"
+            android:layout_marginTop="@dimen/DIMEN_60PX"
+            android:background="@mipmap/reg_logo"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:paddingLeft="@dimen/DIMEN_30PX"
+        android:paddingRight="@dimen/DIMEN_30PX">
+
+        <EditText
+            android:layout_marginTop="@dimen/DIMEN_30PX"
+            android:id="@+id/et_reg_number"
+            android:layout_width="@dimen/DIMEN_550PX"
+            android:layout_height="@dimen/DIMEN_80PX"
+            android:paddingLeft="@dimen/DIMEN_15PX"
+            android:layout_toRightOf="@id/iv_register_cellphone"
+            android:background="@mipmap/reg_textbox"
+            android:hint="手机号码:"
+            android:inputType="phone"
+            android:layout_centerVertical="true"
+            android:textColorHint="@color/hint_text_color"
+            android:textSize="@dimen/DIMEN_36PX" />
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/DIMEN_20PX"
+            android:layout_width="@dimen/DIMEN_550PX"
+            android:layout_height="@dimen/DIMEN_80PX"
+            android:background="@color/gray_f4f4f4_background">
+
+            <EditText
+                android:id="@+id/et_authreg_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_auth_code"
+                android:background="@mipmap/reg_textbox"
+                android:hint="验证码:"
+                android:paddingLeft="@dimen/DIMEN_15PX"
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="@dimen/DIMEN_36PX" />
+
+            <Button
+                android:id="@+id/bt_getregauth_pwd"
+                android:layout_width="@dimen/DIMEN_160PX"
+                android:layout_height="@dimen/DIMEN_90PX"
+                android:layout_alignParentRight="true"
+                android:text="获取验证码"
+                android:textSize="@dimen/DIMEN_25PX"
+                android:textColor="@drawable/reg_btn_text_selector"
+                android:background="@drawable/reg_btn_selector"
+                />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_reg_pwd"
+            android:layout_width="@dimen/DIMEN_550PX"
+            android:layout_height="@dimen/DIMEN_80PX"
+            android:layout_toRightOf="@id/iv_register_password"
+            android:hint="密码:"
+            android:paddingLeft="@dimen/DIMEN_15PX"
+            android:layout_marginTop="@dimen/DIMEN_20PX"
+            android:background="@mipmap/reg_textbox"
+            android:inputType="textPassword"
+            android:textColorHint="@color/hint_text_color"
+            android:textSize="@dimen/DIMEN_36PX" />
+
+        <EditText
+            android:id="@+id/et_reg_repwd"
+            android:layout_width="@dimen/DIMEN_550PX"
+            android:layout_height="@dimen/DIMEN_80PX"
+            android:layout_toRightOf="@id/iv_register_password"
+            android:hint="再次输入密码:"
+            android:paddingLeft="@dimen/DIMEN_15PX"
+            android:layout_marginTop="@dimen/DIMEN_20PX"
+            android:background="@mipmap/reg_textbox"
+            android:inputType="textPassword"
+            android:textColorHint="@color/hint_text_color"
+            android:textSize="@dimen/DIMEN_36PX" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/btn_finish_reg"
+        android:layout_width="@dimen/DIMEN_550PX"
+        android:layout_height="@dimen/DIMEN_80PX"
+        android:layout_marginTop="@dimen/DIMEN_50PX"
+        android:layout_marginRight="@dimen/DIMEN_30PX"
+        android:layout_marginLeft="@dimen/DIMEN_30PX"
+        android:background="@drawable/reg_btn_selector"
+        android:textColor="@drawable/reg_btn_text_selector"
+        android:text="确定"
+        />
+</LinearLayout>

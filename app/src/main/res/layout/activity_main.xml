@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray_F0F0F0"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     tools:context="com.yunduo.huopinclientapp.MainActivity">
 
     <!-- 主界面容器 -->
@@ -31,25 +33,25 @@
             style="@style/MainRadionBtn"
             android:checked="true"
             android:drawableTop="@drawable/dianpu_selector"
-            android:text="店铺"
+            android:text="@string/title_first"
             />
         <RadioButton
             android:id="@+id/main_form"
             style="@style/MainRadionBtn"
             android:drawableTop="@drawable/huopin_selector"
-            android:text="火拼"
+            android:text="@string/title_huopin"
             />
         <RadioButton
             android:id="@+id/main_vip"
             style="@style/MainRadionBtn"
             android:drawableTop="@drawable/kabao_selector"
-            android:text="卡包"
+            android:text="@string/title_shoppingCar"
             />
         <RadioButton
             android:id="@+id/main_my"
             style="@style/MainRadionBtn"
             android:drawableTop="@drawable/wode_selector"
-            android:text="我的"
+            android:text="@string/title_wode"
             />
     </RadioGroup>
 </LinearLayout>

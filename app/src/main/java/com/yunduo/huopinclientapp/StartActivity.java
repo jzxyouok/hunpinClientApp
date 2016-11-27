@@ -37,7 +37,7 @@ public class StartActivity extends BaseActivity {
         }
 
         //如果是第一次进来，就显示引导页  并进入主界面
-        if((Boolean) SPUtils.get(StartActivity.this, IndexActivity.FIRST_ENTER, true)){
+        if((Boolean) SPUtils.get_CFG(StartActivity.this, IndexActivity.FIRST_ENTER, true)){
             ActManager.getActManager().openActivity(StartActivity.this, IndexActivity.class, null);
             finish();
             return;

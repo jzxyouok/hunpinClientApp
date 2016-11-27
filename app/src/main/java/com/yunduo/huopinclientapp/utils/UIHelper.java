@@ -1,4 +1,4 @@
-package com.yunduo.huopinclientapp.helper;
+package com.yunduo.huopinclientapp.utils;
 
 import android.content.Context;
 

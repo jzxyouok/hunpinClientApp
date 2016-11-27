@@ -16,10 +16,12 @@ import com.yunduo.huopinclientapp.asynctasks.RegisterAsyncTask;
 import com.yunduo.huopinclientapp.asynctasks.TaskCallback;
 import com.yunduo.huopinclientapp.asynctasks.TaskResult;
 import com.yunduo.huopinclientapp.configs.URLS;
+import com.yunduo.huopinclientapp.utils.ActionBarManager;
 import com.yunduo.huopinclientapp.utils.InputVerfiyUtil;
 import com.yunduo.huopinclientapp.utils.MyToast;
 import com.yunduo.huopinclientapp.utils.NetWorkListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +36,7 @@ import cn.smssdk.SMSSDK;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView back;
-    private EditText regPhone,regPwd,regPhoneCode;
+    private EditText regPhone,regPwd,regPhoneCode,regRePwd;
     private Button btnGetCode,btnReg;
 
     private static final int VERFIY_COMPLETEED = 1; //验证完成
@@ -80,7 +82,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_viphuopin);
+
+        ActionBarManager.getInstance().initSystemBarTran(true,this,R.color.register_actionbar_color);
+
         //初始化短信验证
         SMSSDK.registerEventHandler(ev); //注册短信回调监听
 
@@ -92,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         regPhone = (EditText) findViewById(R.id.et_reg_number);
         regPwd = (EditText) findViewById(R.id.et_reg_pwd);
         regPhoneCode = (EditText) findViewById(R.id.et_authreg_code);
+        regRePwd = (EditText) findViewById(R.id.et_reg_repwd);
 
         btnGetCode = (Button) findViewById(R.id.bt_getregauth_pwd);
         btnReg = (Button) findViewById(R.id.btn_finish_reg);
@@ -104,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String acc;
     private String pwd;
     private String phoneCode;
+    private String repwd;
 
     @Override
     public void onClick(View view) {
@@ -111,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         acc = regPhone.getText().toString().trim();
         pwd = regPwd.getText().toString().trim();
         phoneCode = regPhoneCode.getText().toString();
+        repwd = regRePwd.getText().toString().trim();
 
         //注册界面
         switch(view.getId()){
@@ -129,8 +137,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.btn_finish_reg:
                 //校验输入数据：
-                if(InputVerfiyUtil.verfiyPhoneNum(this,acc)&&InputVerfiyUtil.verfiyPwd(this,pwd)
-                    &&InputVerfiyUtil.verfiyPhoneCode(this,phoneCode)){
+                if(InputVerfiyUtil.verfiyPhoneNum(this,acc) && InputVerfiyUtil.verfiyPwd(this,pwd)
+                    && InputVerfiyUtil.verfiyPhoneCode(this,phoneCode) && InputVerfiyUtil.isEquals(this,pwd,repwd)){
                     //验证验证码
 //                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
                     register(acc,pwd); //测试进度条
@@ -184,8 +192,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onTaskFinished(TaskResult result) {
                 try {
                     if( result.data != null){
-                        JSONObject str = (JSONObject) result.data;
-                        String resultCode = str.getString("RegisterNormalUserResultCode");
+                        JSONArray array = (JSONArray) result.data;
+                        JSONObject obj = array.getJSONObject(0);
+
+                        String resultCode = obj.getString("resultCode");
                         Message msg = new Message();
                         switch(resultCode){
                             case "0":
@@ -193,6 +203,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 msg.what = REGISTER_SUCCESS;//验证成功  结束当前Activity：
                                 break;
                             case "-1":
+                                //该账号已经被注册
+                                msg.what = ACCOUNT_REGISTERED;
+                                break;
+                            case "-3":
                                 //账号或者密码格式不合法
                                 msg.what = ACC_NOTFORMAT;
                                 break;
@@ -200,10 +214,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 //服务器内部异常
                                 msg.what = SERVICE_EXCEPTION;
                                 break;
-                            case "-3":
-                                //该账号已经被注册
-                                msg.what = ACCOUNT_REGISTERED;
-                                break;
+
                             default:
                                 break;
                         }

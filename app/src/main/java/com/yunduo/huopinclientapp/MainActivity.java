@@ -1,21 +1,17 @@
 package com.yunduo.huopinclientapp;
 
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.WindowManager;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.yunduo.huopinclientapp.activitys.BaseActivity;
-import com.yunduo.huopinclientapp.fragments.CardFragment;
+import com.yunduo.huopinclientapp.fragments.ShopCarFragment;
 import com.yunduo.huopinclientapp.fragments.MyFragment;
 import com.yunduo.huopinclientapp.fragments.PartnerFragment;
-import com.yunduo.huopinclientapp.fragments.ShopFragment;
+import com.yunduo.huopinclientapp.fragments.FirstFragment;
+import com.yunduo.huopinclientapp.utils.ActionBarManager;
 
 /**
  * 主界面   火拼客户端  -客户版
@@ -28,8 +24,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBarManager.getInstance().initSystemBarTran(true,this, R.color.gray_F9F9F9);
+
         initFragments(savedInstanceState);
     }
+
 
     /**
      * 初始化  Fragment
@@ -46,9 +46,9 @@ public class MainActivity extends BaseActivity {
                 fragments[i] = manager.findFragmentByTag("f" + i);
             }
         }else{
-            fragments[0] = new ShopFragment();
+            fragments[0] = new FirstFragment();
             fragments[1] = new PartnerFragment();
-            fragments[2] = new CardFragment();
+            fragments[2] = new ShopCarFragment();
             fragments[3] = new MyFragment();
             // 采用 hide 和 show 的形式,进行的处理  添加
             // 采用 hide 和 show 的形式,进行的处理  添加
@@ -105,7 +105,5 @@ public class MainActivity extends BaseActivity {
         tx.show(fragments[0]);
         tx.commit();
     }
-
-
 
 }

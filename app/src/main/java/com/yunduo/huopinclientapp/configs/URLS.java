@@ -13,6 +13,8 @@ public final class URLS {
 
     //请求注册  正常使用用户
     public static final String ACTION_REGISTER_NORMAL_USER = "HuoPinWebApp/app/registerNormalUserAction?";
+    //请求登陆
+    public static final String ACTION_LOGIN_NORMAL_USER = "HuoPinWebApp/app/loginNormalUserAction?";
 
     public static final int TASK_ACTION_REGISTER_TASK = 1;
 

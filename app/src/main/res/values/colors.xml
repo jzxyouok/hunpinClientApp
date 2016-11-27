@@ -70,7 +70,7 @@
     <color name="gray_d5d5d5">#d5d5d5</color>
     <color name="gray_f1f1f1">#f1f1f1</color>
 
-    <color name="hint_text_color">#c5c5c5</color>
+    <color name="hint_text_color">#898989</color>
 
     <color name="black_474747">#474747</color>
     <!--70%透明度的黑色-->
@@ -80,5 +80,8 @@
     <color name="black_494949">#494949</color>
 
     <color name="yellow_fa9f34">#fa9f34</color>
+
+    <color name="register_actionbar_color">#13B5B1</color>
+    <color name="login_actionbar_color">#ffffff</color>
 
 </resources>

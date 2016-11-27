@@ -1,25 +1,26 @@
 package com.yunduo.huopinclientapp.fragments;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.widget.ListView;
 
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.domain.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 商铺
+ * 首页
  */
-public class ShopFragment extends Fragment {
+public class FirstFragment extends Fragment {
 
-
-    public ShopFragment() {
+    public FirstFragment() {
     }
 
     @Override
@@ -30,7 +31,10 @@ public class ShopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        View view = inflater.inflate(R.layout.fragment_first, container, false);
+
+        return view;
     }
+
 
 }

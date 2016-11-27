@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.utils.ActionBarManager;
 
 public class AboutUSActivity extends AppCompatActivity {
 
@@ -13,6 +14,9 @@ public class AboutUSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        //透明状态栏
+        ActionBarManager.getInstance().initSystemBarTran(true,this,R.color.gray_F9F9F9);
+
         initView();
     }
 

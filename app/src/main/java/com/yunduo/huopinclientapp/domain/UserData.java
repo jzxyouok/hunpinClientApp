@@ -1,5 +1,8 @@
 package com.yunduo.huopinclientapp.domain;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Package_name:com.yunduo.huopinclientapp.domain
  * Author:zhaoQiang
@@ -9,6 +12,31 @@ package com.yunduo.huopinclientapp.domain;
  * 用户  实体类  保存用户数据  到sp文件
  */
 public final class UserData extends BaseEntity {
+
+    //获取  用户登陆返回信息
+    public static UserData getUserLoginData(JSONObject userJson) {
+        UserData user = null;
+        try {
+            if(userJson instanceof JSONObject){
+                user = new UserData();
+                user.setUserPassword(userJson.getString("userPassword"));
+                user.setUserPhoto(userJson.getString("userPhoto"));
+                user.setUserPayPassword(userJson.getString("userPayPassword"));
+                user.setUserRealName(userJson.getString("userRealName"));
+                user.setUserScore(userJson.getInt("userScore"));
+                user.setUserName(userJson.getString("userName"));
+                user.setUserId(userJson.getInt("userId"));
+                user.setUserRegisterTime(userJson.getInt("userRegisterTime"));
+                user.setUserToken(userJson.getString("userToken"));
+                user.setUserAccount(userJson.getString("userAccount"));
+                user.setUserCardId(userJson.getString("userCardId"));
+                user.setUserLevelId(userJson.getInt("userLevelId"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     /**
      * userPassword : 21232f297a57a5a743894a0e4a801fc3
@@ -47,8 +75,7 @@ public final class UserData extends BaseEntity {
     public UserData() {
         super();
     }
-
-
+    //记录用户所在地址
     private City city;
 
     public City getCity() {
@@ -154,6 +181,8 @@ public final class UserData extends BaseEntity {
     public void setUserLevelId(int userLevelId) {
         this.userLevelId = userLevelId;
     }
+
+
 
     @Override
     public String toString() {

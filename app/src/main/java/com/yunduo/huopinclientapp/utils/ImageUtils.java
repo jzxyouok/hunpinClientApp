@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.File;
 
@@ -33,6 +34,7 @@ public final class ImageUtils {
      * 请求图片   并裁剪
      */
     public static final int REQUEST_CODE_GETIMAGE_BYCROP = 2;
+
 
     /**
      * 判断当前Url是否标准的content://样式，如果不是，则返回绝对路径

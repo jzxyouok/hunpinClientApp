@@ -1,13 +1,6 @@
 package com.yunduo.huopinclientapp.asynctasks;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.provider.SyncStateContract;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 
 import com.yunduo.huopinclientapp.api.ClientApi;
 import com.yunduo.huopinclientapp.configs.URLS;
@@ -19,15 +12,14 @@ import org.json.JSONObject;
  * Package_name:com.yunduo.huopinclientapp.asynctasks
  * Author:zhaoQiang
  * Email:zhao_hero@163.com
- * Date:2016/9/20  23:03
- * 请求注册信息的   异步任务类
+ * Date:2016/10/12  16:37
  */
-public class RegisterAsyncTask extends BaseAsyncTask {
+public class LoginAsyncTask extends BaseAsyncTask{
 
-    private  Context context;
+    private Context context;
 
-    public RegisterAsyncTask(Context context, TaskCallback callback) {
-        super(context,callback);
+    public LoginAsyncTask(Context context, TaskCallback callback) {
+        super(context, callback);
         this.context = context;
     }
 
@@ -43,7 +35,7 @@ public class RegisterAsyncTask extends BaseAsyncTask {
             String acc = params[0];
             String pwd = params[1];
 
-            JSONArray object = ClientApi.getRegisterResult(acc,pwd);
+            JSONArray object = ClientApi.getLoginResult(acc,pwd);
 
             if(object!=null){
                 ret.data = object;
@@ -51,6 +43,4 @@ public class RegisterAsyncTask extends BaseAsyncTask {
         }
         return ret;
     }
-
-
 }

@@ -1,0 +1,20 @@
+<resources>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/gray_F9F9F9</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--和  代码中效果一样  但需要  api>=19 使用-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--恢复状态栏的  位置空间-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--恢复状态栏的  位置空间-->
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+</resources>

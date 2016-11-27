@@ -1,9 +1,10 @@
-package com.yunduo.huopinclientapp.helper;
+package com.yunduo.huopinclientapp.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yunduo.huopinclientapp.R;
+import com.yunduo.huopinclientapp.activitys.SettingActivity;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  * Date:2016/10/9  14:56
  * 对话框  帮助类
  */
-public final class DialogHelp {
+public final class DialogUtil {
 
     /***
      * 获取一个dialog
@@ -54,4 +56,23 @@ public final class DialogHelp {
         return builder;
     }
 
+    //推出登陆程序
+    public static AlertDialog.Builder getExitDialog(final Context context, String title) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        if(title!=null){
+            builder.setTitle(title);
+        }
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //清除缓存  推出登陆
+                SPUtils.clear(context,SPUtils.FILE_NAME_LOGIN_USER_INFO);
+                MyToast.ToastInLow(context,"当前已退出");
+            }
+        });
+
+        builder.setNegativeButton("取消",null);
+        return builder;
+    }
 }

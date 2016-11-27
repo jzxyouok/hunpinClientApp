@@ -2,7 +2,6 @@ package com.yunduo.huopinclientapp.fragments;
 
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -10,18 +9,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yunduo.huopinclientapp.AppAplication;
 import com.yunduo.huopinclientapp.R;
 import com.yunduo.huopinclientapp.activitys.LoginActivity;
 import com.yunduo.huopinclientapp.activitys.SettingActivity;
-import com.yunduo.huopinclientapp.helper.DialogHelp;
+import com.yunduo.huopinclientapp.utils.DialogUtil;
 import com.yunduo.huopinclientapp.utils.FileUtils;
 import com.yunduo.huopinclientapp.utils.ImageUtils;
 import com.yunduo.huopinclientapp.utils.LoginUtil;
@@ -108,7 +106,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
 
     private void handleSelectPicture() {
-        DialogHelp.getSelectDialog(getContext(), null, new View.OnClickListener() {
+        DialogUtil.getSelectDialog(getContext(), null, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch(view.getId()){
@@ -197,14 +195,41 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case ImageUtils.REQUEST_CODE_GETIMAGE_BYCROP:
+                Log.i("info","-----caijian---");
                 startActionCrop(imageReturnIntent.getData());// 选图后裁剪
                 break;
 
             case ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD: //裁剪  完成上传至服务器
+                Log.i("info","---che----------------------------------------------nggong-");
 //                uploadNewPhoto();
                 break;
         }
     }
+
+
+
+//    /**
+//     * 保存裁剪之后的图片数据
+//     * @param picdata
+//     */
+//    private void setPicToView(Intent picdata) {
+//        Bundle extras = picdata.getExtras();
+//        if (extras != null) {
+//
+//            Log.i("info",extras.toString()+"--");
+//            // 取得SDCard图片路径做显示
+//            Bitmap photo = extras.getParcelable("data");
+//            Drawable drawable = new BitmapDrawable(null, photo);
+//            //保存文件到本地
+//            FileUtils.saveFile(getContext(),"", "headic",
+//                    FileUtils.bitmapToBytes(photo));
+//            headIcon.setImageDrawable(drawable);
+//
+//            // 新线程后台上传服务端
+////            pd = ProgressDialog.show(mContext, null, "正在上传图片，请稍候...");
+////            new Thread(uploadImageRunnable).start();
+//        }
+//    }
 
     /**
      * 拍照后裁剪
@@ -226,10 +251,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD);
     }
 
-
-    private File protraitFile;
     private String protraitPath;
-
+    private File protraitFile;
     // 裁剪头像的绝对路径
     private Uri getUploadTempFile(Uri uri) {
         String storageState = Environment.getExternalStorageState();
@@ -239,20 +262,20 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 savedir.mkdirs();
             }
         } else {
-            MyToast.ToastInLow(getContext().getApplicationContext(),"无法保存照片，请检查SD卡是否挂载");
+            MyToast.ToastIncenter(getContext(),"无法保存上传的头像，请检查SD卡是否挂载");
             return null;
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String thePath = ImageUtils.getAbsolutePathFromNoStandardUri(uri);
 
         // 如果是标准Uri
-        if (thePath!=null && !thePath.equals("")) {
+        if (thePath==null || thePath.equals("")) {
             thePath = ImageUtils.getAbsoluteImagePath(getActivity(), uri);
         }
         String ext = FileUtils.getFileFormat(thePath);
-        ext = (ext==" "||ext.equals("")) ? "jpg" : ext;
+        ext = (ext == null || ext.equals(""))? "jpg" : ext;
         // 照片命名
-        String cropFileName = "huPin_crop_" + timeStamp + "." + ext;
+        String cropFileName = "huopin_crop_" + timeStamp + "." + ext;
         // 裁剪头像的绝对路径
         protraitPath = FILE_SAVEPATH + cropFileName;
         protraitFile = new File(protraitPath);

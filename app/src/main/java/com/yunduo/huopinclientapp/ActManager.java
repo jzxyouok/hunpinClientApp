@@ -19,6 +19,7 @@ public final class ActManager {
 
     private static Stack<Activity> activityStack;
     private static ActManager instance;
+
     /**
      * 单一实例
      */

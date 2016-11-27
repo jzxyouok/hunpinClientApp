@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center"
+    tools:context="com.yunduo.huopinclientapp.activitys.LoginActivity">
+
+    <ImageView
+        android:layout_gravity="left"
+        android:id="@+id/title_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DIMEN_30PX"
+        android:background="#13B5B1"
+        android:src="@mipmap/title_left" />
+
+    <ImageView
+        android:layout_marginTop="@dimen/DIMEN_230PX"
+        android:layout_width="@dimen/DIMEN_320PX"
+        android:layout_height="@dimen/DIMEN_160PX"
+        android:background="@mipmap/logo"
+        android:layout_marginBottom="@dimen/DIMEN_50PX"
+        />
+
+    <include layout="@layout/login_view"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+        <RadioButton
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/btn_login"
+            android:layout_width="@dimen/DIMEN_240PX"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DIMEN_60PX"
+            android:layout_marginRight="@dimen/DIMEN_15PX"
+            android:background="@drawable/login_btn_selector"
+            android:textColor="@drawable/btn_text_selector"
+            android:textSize="@dimen/DIMEN_30PX"
+            android:checked="true"
+            android:text="登录"
+            />
+
+        <RadioButton
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/title_register"
+            android:textSize="@dimen/DIMEN_30PX"
+            android:layout_width="@dimen/DIMEN_240PX"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DIMEN_60PX"
+            android:background="@drawable/login_btn_selector"
+            android:textColor="@drawable/btn_text_selector"
+            android:text="注册"
+            />
+
+    </RadioGroup>
+
+</LinearLayout>
