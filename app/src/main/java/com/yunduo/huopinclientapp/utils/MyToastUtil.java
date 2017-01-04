@@ -2,9 +2,6 @@ package com.yunduo.huopinclientapp.utils;
 
 import android.content.Context;
 import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -13,7 +10,7 @@ import android.widget.Toast;
  * AUTHOR_EMAIL:zhaoq_hero@163.com
  * DATE: 2016/03/26  10:06
  */
-public final class MyToast {
+public final class MyToastUtil {
 
     /**
      * 自定义toast  显示位置
@@ -21,8 +18,8 @@ public final class MyToast {
      * @param message
      * @return
      */
-    public static void ToastIncenter(Context context,String message){
-        Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
+    public static void ToastIncenter(Context context, String message){
+        Toast toast = Toast.makeText(context,message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
     }
@@ -33,8 +30,8 @@ public final class MyToast {
      * @param message
      * @return
      */
-    public static void ToastInLow(Context context,String message){
-        Toast toast = Toast.makeText(context,message,Toast.LENGTH_LONG);
+    public static void ToastInLow(Context context, String message){
+        Toast toast = Toast.makeText(context,message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

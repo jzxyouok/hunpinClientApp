@@ -1,14 +1,16 @@
 package com.yunduo.huopinclientapp;
 
-import android.app.AppOpsManager;
 import android.app.Application;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
-import cn.smssdk.SMSSDK;
+import com.yunduo.huopinclientapp.api.OkGoInstance;
+import com.yunduo.huopinclientapp.utils.ImagePickerUtils;
+import com.yunduo.huopinclientapp.utils.SharePreferanceUtil;
+import com.yunduo.huopinclientapp.utils.StringUtils;
+
+import java.util.UUID;
 
 /**
  * Package_name:com.yunduo.huopinmerchantapp
@@ -21,6 +23,8 @@ public final class AppAplication extends Application {
     public static  AppAplication instance;
     private static Context context;
 
+    private static final String CONFIG_UNIQUEID = "unique_id";
+
     public AppAplication(){
         if(null == instance){
             instance = this;
@@ -30,26 +34,19 @@ public final class AppAplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initSMSSdk();
+        //初始化   ImagePicker选择
         context=this;
+        //初始化   网络连接  工具类
+        OkGoInstance.getInstance().init(this);
+        ImagePickerUtils.getImpickerUtils().initImagePicker(this);
+
     }
-
-    private static final String APPKey = "173f02ecf977c";
-    private static final String APPScrate="77d726ad03a626abcf7c70e31612024c";
-
-    //初始化  第三方sdk
-    private void initSMSSdk() {
-        //初始化  短信验证sdk
-        SMSSDK.initSDK(getApplicationContext(), APPKey, APPScrate);
-    }
-
 
     //内存  占用较高时    调用垃圾回收机制
     public void onLowMomory(){
         super.onLowMemory();
         System.gc();
     }
-
 
     /**
      * 获取App安装包信息
@@ -66,4 +63,16 @@ public final class AppAplication extends Application {
         return info;
     }
 
+    /**
+     * 获取 App的唯一  标识
+     * @return
+     */
+    public String getAppId() {
+        String uniqueId = (String) SharePreferanceUtil.getSpUtil().get_sp(this,CONFIG_UNIQUEID,"");
+        if(StringUtils.isEmpty(uniqueId)){
+            uniqueId = UUID.randomUUID().toString();
+            SharePreferanceUtil.getSpUtil().put_sp(this,CONFIG_UNIQUEID,uniqueId);
+        }
+        return uniqueId;
+    }
 }

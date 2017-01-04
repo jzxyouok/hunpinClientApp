@@ -1,6 +1,5 @@
 package com.yunduo.huopinclientapp.activitys;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -12,23 +11,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.yunduo.huopinclientapp.R;
-import com.yunduo.huopinclientapp.asynctasks.RegisterAsyncTask;
-import com.yunduo.huopinclientapp.asynctasks.TaskCallback;
-import com.yunduo.huopinclientapp.asynctasks.TaskResult;
-import com.yunduo.huopinclientapp.configs.URLS;
+import com.yunduo.huopinclientapp.api.ClientApi;
 import com.yunduo.huopinclientapp.utils.ActionBarManager;
 import com.yunduo.huopinclientapp.utils.InputVerfiyUtil;
-import com.yunduo.huopinclientapp.utils.MyToast;
-import com.yunduo.huopinclientapp.utils.NetWorkListener;
+import com.yunduo.huopinclientapp.utils.JSONParseUtil;
+import com.yunduo.huopinclientapp.utils.LoginUtil;
+import com.yunduo.huopinclientapp.utils.MyToastUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
 
 /**
  * 注册界面
@@ -38,9 +29,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private ImageView back;
     private EditText regPhone,regPwd,regPhoneCode,regRePwd;
     private Button btnGetCode,btnReg;
-
-    private static final int VERFIY_COMPLETEED = 1; //验证完成
-    private static final int VERFIY_FAIL = 2;//验证失败
 
     private static final int REGISTER_SUCCESS = 3;//注册成功
     private static final int ACCOUNT_REGISTERED = 4;//账号已经被注册
@@ -53,26 +41,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             super.handleMessage(msg);
             switch(msg.what){
                 case REGISTER_SUCCESS:
-                    MyToast.ToastIncenter(RegisterActivity.this,"注册成功");
+                    MyToastUtil.ToastIncenter(RegisterActivity.this,"注册成功");
                     RegisterActivity.this.finish();
                     break;
                 case ACCOUNT_REGISTERED:
-                    MyToast.ToastIncenter(RegisterActivity.this,"该账号已经被注册");
+                    MyToastUtil.ToastIncenter(RegisterActivity.this,"该账号已经被注册");
                     break;
                 case SERVICE_EXCEPTION:
-                    MyToast.ToastIncenter(RegisterActivity.this,"服务器异常");
+                    MyToastUtil.ToastIncenter(RegisterActivity.this,"服务器异常");
                     break;
                 case ACC_NOTFORMAT:
-                    MyToast.ToastIncenter(RegisterActivity.this,"请注意输入数据格式");
+                    MyToastUtil.ToastIncenter(RegisterActivity.this,"请注意输入数据格式");
                     break;
 
-                case VERFIY_COMPLETEED:
-                    MyToast.ToastIncenter(RegisterActivity.this,"已发送验证码");
-                    break;
-                case VERFIY_FAIL:
-                    MyToast.ToastIncenter(RegisterActivity.this,"验证码验证失败");
-                    break;
 
+                case ClientApi.SEND_VERFIY_SUCCESS:
+                    try {
+                        String str = (String) msg.obj;
+                        JSONObject object = new JSONObject(str);
+                        MyToastUtil.ToastInLow(RegisterActivity.this,object.getString("resultMessage"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.i("info","json解析异常");
+                    }
+                    break;
                 default:
                     break;
             }
@@ -83,12 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_viphuopin);
-
         ActionBarManager.getInstance().initSystemBarTran(true,this,R.color.register_actionbar_color);
-
-        //初始化短信验证
-        SMSSDK.registerEventHandler(ev); //注册短信回调监听
-
         initView();
     }
 
@@ -129,108 +116,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.bt_getregauth_pwd:
-                if(InputVerfiyUtil.verfiyPhoneNum(this,acc)){
+                //TODO  暂时不做验证
+//                if(InputVerfiyUtil.verfiyPhoneNum(this,acc)){
                     //获取 验证码
-                    SMSSDK.getVerificationCode("+86", acc);
-                }
+                    LoginUtil.sendVerfiy(this,"18310541176",handler);
+//                }
                 break;
 
             case R.id.btn_finish_reg:
                 //校验输入数据：
-                if(InputVerfiyUtil.verfiyPhoneNum(this,acc) && InputVerfiyUtil.verfiyPwd(this,pwd)
-                    && InputVerfiyUtil.verfiyPhoneCode(this,phoneCode) && InputVerfiyUtil.isEquals(this,pwd,repwd)){
-                    //验证验证码
-//                    SMSSDK.submitVerificationCode("+86", acc, phoneCode);//国家号，手机号码，验证码
-                    register(acc,pwd); //测试进度条
-                }
+                //TODO  注册  暂时不做校验
+//                if(InputVerfiyUtil.verfiyPhoneNum(this,acc) && InputVerfiyUtil.verfiyPwd(this,pwd)
+//                    && InputVerfiyUtil.verfiyPhoneCode(this,phoneCode) && InputVerfiyUtil.isEquals(this,pwd,repwd)){
+                    register(acc,pwd,phoneCode); //测试进度条
+//                }
                 break;
             default:
                 break;
         }
     }
 
-    /**
-     * 短信验证的回调监听
-     */
-    private  EventHandler ev = new EventHandler() {
-        @Override
-        public void afterEvent(int event, int result, Object data) {
-            if (result == SMSSDK.RESULT_COMPLETE) { //回调完成
-                Message msg = new Message();
-                //提交  验证码成功,如果  验证成功会在data里返回数据。data数据类型为HashMap<number,code>
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    //验证 验证码回调  验证输入验证码
-                    HashMap<String, Object> mData = (HashMap<String, Object>) data;
-                    String country = (String) mData.get("country");//返回的国家编号
-                    String phone = (String) mData.get("phone");//返回用户注册的手机号
-
-                    if(phone.equals(acc)){
-                        //验证成功 z注册信息
-                        register(acc,pwd);
-                    }else{
-                        //验证失败
-                        msg.what = VERFIY_FAIL;//验证失败：
-                    }
-                }else if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
-                    msg.what = VERFIY_COMPLETEED;//短信发送成功   暂不处理
-                }
-                handler.sendMessage(msg);
-            }else {
-                Message msg = new Message();
-                msg.what = VERFIY_FAIL;//验证失败：
-                handler.sendMessage(msg);
-                ((Throwable)data).printStackTrace();
-            }
-        }
-    };
-
     //开始注册
-    private void register(String acc, String pwd) {
-        //服务端注册信息
-        new RegisterAsyncTask(this,new TaskCallback() {
-            @Override
-            public void onTaskFinished(TaskResult result) {
-                try {
-                    if( result.data != null){
-                        JSONArray array = (JSONArray) result.data;
-                        JSONObject obj = array.getJSONObject(0);
-
-                        String resultCode = obj.getString("resultCode");
-                        Message msg = new Message();
-                        switch(resultCode){
-                            case "0":
-                                //注册成功
-                                msg.what = REGISTER_SUCCESS;//验证成功  结束当前Activity：
-                                break;
-                            case "-1":
-                                //该账号已经被注册
-                                msg.what = ACCOUNT_REGISTERED;
-                                break;
-                            case "-3":
-                                //账号或者密码格式不合法
-                                msg.what = ACC_NOTFORMAT;
-                                break;
-                            case "-2":
-                                //服务器内部异常
-                                msg.what = SERVICE_EXCEPTION;
-                                break;
-
-                            default:
-                                break;
-                        }
-                        handler.sendMessage(msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).execute(acc,pwd);
+    private void register(String acc, String pwd,String phoneCode) {
+        LoginUtil.toLogin(this,"18310541176","123456","167741",handler,"register");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //要在activity销毁时反注册，否侧会造成内存泄漏问题
-        SMSSDK.unregisterAllEventHandler();
     }
 }

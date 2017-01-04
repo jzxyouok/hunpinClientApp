@@ -68,7 +68,7 @@ public final class DialogUtil {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //清除缓存  推出登陆
                 SPUtils.clear(context,SPUtils.FILE_NAME_LOGIN_USER_INFO);
-                MyToast.ToastInLow(context,"当前已退出");
+                MyToastUtil.ToastInLow(context,"当前已退出");
             }
         });
 

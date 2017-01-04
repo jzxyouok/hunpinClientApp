@@ -23,7 +23,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
-    compile name: 'SMSSDK-2.1.1', ext: 'aar'
-    compile files('libs/commons-httpclient-3.1.jar')
     compile files('libs/systembartint-1.0.4.jar')
+    compile 'com.lzy.widget:imagepicker:0.3.2'
+    compile 'com.lzy.net:okgo:2.1.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

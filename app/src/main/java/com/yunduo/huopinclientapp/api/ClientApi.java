@@ -1,21 +1,24 @@
 package com.yunduo.huopinclientapp.api;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
-import com.yunduo.huopinclientapp.AppException;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.yunduo.huopinclientapp.configs.URLS;
-import com.yunduo.huopinclientapp.utils.HttpTools;
-import com.yunduo.huopinclientapp.utils.StreamUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Response;
+
+import static com.yunduo.huopinclientapp.R.mipmap.pwd;
 
 /**
  * Package_name:com.yunduo.huopinclientapp.api
@@ -25,77 +28,112 @@ import java.util.Map;
  */
 public class ClientApi {
 
-    private  static String URL_HOST = URLS.URL_HOST;
+    //获取验证码成功
+    public static final int SEND_VERFIY_SUCCESS = 0x82;
+
+    //注册  和登录成功或失败的回调
+    public static final int REGISTER_SUCCESS = 0x22;
+    public static final int LOGIN_SUCCESS = 0x81;
+    public static final int LOGIN_OR_REGISTER_ERROR = 0x12;
 
     /**
-     * 获取  注册信息  请求信息是否成功
-     * @return
+     * 发送验证码
+     * @param registerActivity
+     * @param acc
+     * @param handler
      */
-    public static JSONArray getRegisterResult(String acc,String password) {
+    public static void sendVerfiy(final Activity registerActivity, final String acc, final Handler handler) {
+        OkGo.get(URLs.URL_SENDVERFIY)
+                .tag(registerActivity)
+                .params("sendMobile", acc)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        //不做处理   用户自己处理
+                        if(s!=null){
+                            Message msg = new Message();
+                            msg.obj = s;
+                            msg.what = SEND_VERFIY_SUCCESS;
+                            handler.sendMessage(msg);
+                        }
+                    }
 
-        JSONArray ret = null;
-
-        Map<String,Object> params = new HashMap<String,Object>();
-        params.put("userPassword", password);
-        params.put("userAccount", acc);
-
-        InputStream in = null;
-        try {
-            in = HttpTools._post(URLS.URL_HOST+URLS.ACTION_REGISTER_NORMAL_USER,params,null);
-            byte[] bs = StreamUtils.readStream(in);
-            String data = new String(bs,"utf-8");
-            if(data!=null){
-                return new JSONArray(data);
-            }
-        } catch (AppException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } finally{//释放内存
-            params.clear();
-        }
-        return ret;
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        OkGo.getInstance().cancelTag(registerActivity);
+                    }
+                });
     }
 
+
     /**
-     * 登录
+     * 登录  或者注册
+     * @param activity
      * @param acc
      * @param pwd
+     * @param handler
+     * @param action
      * @return
      */
-    public static JSONArray getLoginResult(String acc, String pwd) {
-        JSONArray ret = null;
-
-        Map<String,Object> params = new HashMap<String,Object>();
-        params.put("userPassword", pwd);
-        params.put("userAccount", acc);
-
-        InputStream in = null;
-        try {
-            in = HttpTools._post(URLS.URL_HOST+ URLS.ACTION_LOGIN_NORMAL_USER,params,null);
-            byte[] bs = StreamUtils.readStream(in);
-            String data = new String(bs,"utf-8");
-
-            Log.i("info",data+"----");
-
-            if(data!=null){
-                return new JSONArray(data);
-            }
-        } catch (AppException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } finally{//释放内存
-            params.clear();
+    public static void toLogin(final Activity activity, String acc, String pwd, String verfiy, final Handler handler, final String action) {
+        String url = null;
+        HashMap map = getMap();
+        if(action.equals("register")){
+            url =URLs.URL_REGISTER;
+            map.put("userAccount", acc);
+            map.put("userPassword", pwd);
+            map.put("registerCode", verfiy);
+        }else{
+            url =URLs.URL_LOGIN;
+            map.put("userAccount", acc);
+            map.put("userPassword", pwd);
         }
-        return ret;
+        OkGo.get(url)
+                .tag(activity)
+                .params(map,false)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, okhttp3.Call call, Response response) {
+                        if(s!=null){
+                            if(action.equals("register")){//处理注册
+                                Message msg = new Message();
+                                msg.obj = s;
+                                msg.what = REGISTER_SUCCESS;
+                                handler.sendMessage(msg);
+                            }else{
+                                //处理登录
+                                Message msg = new Message();
+                                msg.obj = s;
+                                msg.what = LOGIN_SUCCESS;
+                                handler.sendMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        handler.sendEmptyMessage(LOGIN_OR_REGISTER_ERROR);
+                        OkGo.getInstance().cancelTag(activity);
+                    }
+                });
     }
+
+
+    static HashMap<String, Object> map = null;
+
+    /**
+     * 获取  map对象
+     *
+     * @return
+     */
+    public static HashMap<String, Object> getMap() {
+        if (map == null) {
+            map = new HashMap<String, Object>();
+        }
+        return map;
+    }
+
+
 }
