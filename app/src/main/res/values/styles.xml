@@ -18,6 +18,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/DIMEN_28PX</item>
         <item name="android:textColor">@drawable/main_btntext_selector</item>
+        <item name="android:drawablePadding">@dimen/DIMEN_10PX</item>
     </style>
 
     <!--登录页面中  -->

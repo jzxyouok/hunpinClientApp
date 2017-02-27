@@ -6,5 +6,4 @@
 
     <include layout="@layout/title_bar_view"/>
 
-
 </FrameLayout>

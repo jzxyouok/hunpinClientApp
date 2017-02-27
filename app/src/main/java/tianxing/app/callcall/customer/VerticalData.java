@@ -1,8 +1,8 @@
 package tianxing.app.callcall.customer;
 
-import tianxing.app.callcall.customer.domain.BusinessBean;
-
 import java.util.ArrayList;
+
+import tianxing.app.callcall.customer.domain.GVCategory;
 
 /**
  * Package_name:com.yunduo.huopinclientapp
@@ -14,39 +14,22 @@ import java.util.ArrayList;
 public class VerticalData {
 
     /**
-     * 获取 娱乐商家数据信息
+     * 获取 首页 分类列表数据
      * @return
      */
-    public static ArrayList<BusinessBean> getEnteainmentList(){
-        ArrayList<BusinessBean> list = new ArrayList<>();
+    public static ArrayList<GVCategory> getGridViewList() {
 
-        for(int i = 0;i<10;i++){
-            BusinessBean entertainmentBusiness = new BusinessBean();
+        ArrayList<GVCategory> list = new ArrayList<>();
 
-            entertainmentBusiness.setBusinessName("商家名称"+i);
-            entertainmentBusiness.setImageUrl("http://p0.meituan.net/460.280/deal/04573ebf3d16d94605f6097b7fdeda89194047.jpg");
-            list.add(entertainmentBusiness);
+        for(int i=0;i<10;i++){
+            GVCategory gv = new GVCategory();
+
+            gv.setCatelogSecondImgSrc("http://www.qqleju.com/uploads/allimg/160622/22-101309_76.jpg");
+            gv.setCatelogSecondName("类别" + i);
+
+            list.add(gv);
         }
-        return  list;
+
+        return list;
     }
-
-    /**
-     * 获取 吃饭商家数据信息
-     * @return
-     */
-    public static ArrayList<BusinessBean> getEatBuiness(){
-        ArrayList<BusinessBean> list = new ArrayList<>();
-
-        for(int i = 0;i<10;i++){
-            BusinessBean entertainmentBusiness = new BusinessBean();
-
-            entertainmentBusiness.setBusinessName("商家名称"+i);
-            entertainmentBusiness.setImageUrl("http://p0.meituan.net/460.280/deal/b14653bd0970153ad64a19a39ba234fa18411.jpg");
-            list.add(entertainmentBusiness);
-        }
-        return  list;
-    }
-
-
-
 }
