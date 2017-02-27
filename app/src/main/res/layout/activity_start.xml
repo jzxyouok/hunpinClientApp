@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/splash"
-    tools:context="com.yunduo.huopinclientapp.StartActivity">
+    tools:context=".StartActivity">
 </LinearLayout>

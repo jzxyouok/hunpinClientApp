@@ -5,12 +5,65 @@
     android:layout_height="match_parent"
     tools:context=".fragments.FirstFragment">
 
-    <include layout="@layout/title_bar_view"/>
-
-    <ListView
+    <!-- actionbar -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/red_ff556d"
+        android:paddingLeft="@dimen/DIMEN_32PX"
+        android:paddingRight="@dimen/DIMEN_32PX"
+        >
+
+        <TextView
+            android:id="@+id/user_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:text="全国"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DIMEN_10PX"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/icon"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/user_city"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:text="店铺"
+            android:layout_centerInParent="true"
+            />
+
+
+        <ImageView
+            android:id="@+id/msg_info"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/DIMEN_32PX"
+            />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toLeftOf="@id/msg_info"
+            android:src="@mipmap/icon"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/first_fragment_recyleview"/>
 
 </LinearLayout>

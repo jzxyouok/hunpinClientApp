@@ -4,12 +4,9 @@
     <string name="Call_Call">Call Call买家版</string>
     <string name="title_first">首页</string>
     <string name="title_huopin">伙拼</string>
-    <string name="title_shoppingCar">购物车</string>
+    <string name="title_shoppingCar">卡包</string>
     <string name="title_wode">我的</string>
 
     <string name="kefu_phone">18513667437</string>
-
-
-
 
 </resources>

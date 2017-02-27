@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray_F0F0F0"
-    android:fitsSystemWindows="true"
     android:clipToPadding="false"
-    tools:context="com.yunduo.huopinclientapp.MainActivity">
+    tools:context=".MainActivity">
 
     <!-- 主界面容器 -->
     <FrameLayout

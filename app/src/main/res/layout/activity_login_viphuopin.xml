@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:gravity="center"
-    tools:context="com.yunduo.huopinclientapp.activitys.LoginActivity">
+    tools:context=".activitys.LoginActivity">
 
     <ImageView
         android:layout_gravity="left"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.yunduo.huopinclientapp.fragments.MyFragment"
+    tools:context=".fragments.MyFragment"
     >
 
     <include layout="@layout/title_bar_view"/>
@@ -22,7 +22,7 @@
             android:padding="@dimen/DIMEN_20PX"
             android:background="@color/green_6fc80e">
 
-            <com.yunduo.huopinclientapp.view.RoundImageView
+            <tianxing.app.callcall.customer.view.RoundImageView
                 android:id="@+id/my_head_img"
                 android:layout_width="@dimen/DIMEN_150PX"
                 android:layout_height="@dimen/DIMEN_150PX"
@@ -52,6 +52,8 @@
                 android:layout_alignBottom="@id/my_btn_nickness"
                 />
         </RelativeLayout>
+
+
     </LinearLayout>
 
 
