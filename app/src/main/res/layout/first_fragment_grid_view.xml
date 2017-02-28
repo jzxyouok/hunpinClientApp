@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <tianxing.app.callcall.customer.widgets.MyGridView
+        android:id="@+id/first_fragment_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_30PX"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/DIMEN_4PX"
+        android:numColumns="5"
+        android:verticalSpacing="@dimen/DIMEN_4PX"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_20PX"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/DIMEN_50PX"
+            android:src="@mipmap/hor_line"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="娱乐商家排行"
+            android:textSize="16sp"
+            android:textColor="@color/gray_898989"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DIMEN_50PX"
+            android:src="@mipmap/hor_line"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+

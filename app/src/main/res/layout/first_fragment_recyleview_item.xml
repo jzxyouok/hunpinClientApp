@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/shangdian_img"
+        android:layout_width="@dimen/DIMEN_180PX"
+        android:layout_height="@dimen/DIMEN_180PX"
+        android:background="@color/black_474747"
+        android:src="@mipmap/icon"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/DIMEN_30PX"
+        />
+
+    <TextView
+        android:id="@+id/shangdian_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="夏威夷海鲜自助餐厅"
+        android:textSize="20sp"
+        android:textColor="@color/black_474747"
+        android:layout_toRightOf="@id/shangdian_img"
+        android:layout_alignTop="@id/shangdian_img"
+        />
+
+    <TextView
+        android:id="@+id/huopincount"
+        android:layout_below="@id/shangdian_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="火拼次数:2668"
+        android:textSize="15sp"
+        android:textColor="@color/gray_898989"
+        android:layout_toRightOf="@id/shangdian_img"
+        />
+
+    <TextView
+        android:id="@+id/commoncount"
+        android:layout_below="@id/huopincount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="评论数:2668"
+        android:textSize="14sp"
+        android:textColor="@color/gray_898989"
+        android:layout_toRightOf="@id/shangdian_img"
+        />
+
+    <TextView
+        android:id="@+id/nowprice"
+        android:layout_below="@id/commoncount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="￥299"
+        android:textSize="20sp"
+        android:textColor="@color/red_e53951"
+        android:layout_toRightOf="@id/shangdian_img"
+        android:layout_alignBaseline="@id/shangdian_img"
+        />
+
+    <TextView
+        android:id="@+id/oldprice"
+        android:layout_below="@id/commoncount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="￥299"
+        android:textSize="14sp"
+        android:textColor="@color/gray_898989"
+        android:layout_toRightOf="@id/nowprice"
+        android:layout_alignBaseline="@id/nowprice"
+        />
+
+
+    <TextView
+        android:id="@+id/distence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="500米"
+        android:textSize="14sp"
+        android:textColor="@color/gray_898989"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/shangdian_title"
+        />
+
+    <TextView
+        android:id="@+id/discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="7折"
+        android:textSize="18sp"
+        android:textColor="@color/red_e53951"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

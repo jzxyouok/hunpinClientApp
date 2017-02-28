@@ -6,7 +6,7 @@ package tianxing.app.callcall.customer.domain;
  * Email:zhaoq_hero@163.com
  * Date:2017/02/28  00:20
  */
-public class GVCategory extends BaseEntity {
+public class FirstGridViewBean extends BaseEntity {
 
 
     private String catelogSecondImgSrc;

@@ -1,4 +1,4 @@
-package tianxing.app.callcall.customer.view;
+package tianxing.app.callcall.customer.widgets;
 
 import android.content.Context;
 import android.database.DataSetObserver;

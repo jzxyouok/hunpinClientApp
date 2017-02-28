@@ -22,7 +22,7 @@
             android:padding="@dimen/DIMEN_20PX"
             android:background="@color/green_6fc80e">
 
-            <tianxing.app.callcall.customer.view.RoundImageView
+            <tianxing.app.callcall.customer.widgets.RoundImageView
                 android:id="@+id/my_head_img"
                 android:layout_width="@dimen/DIMEN_150PX"
                 android:layout_height="@dimen/DIMEN_150PX"
