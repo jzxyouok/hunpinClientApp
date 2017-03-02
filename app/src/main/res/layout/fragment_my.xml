@@ -1,60 +1,180 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<tianxing.app.callcall.customer.widgets.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:zq="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.MyFragment"
-    >
-
-    <include layout="@layout/title_bar_view"/>
+    tools:context=".fragments.MyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        >
+        android:layout_height="match_parent"
+        android:background="#ddd"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/DIMEN_250PX"
-            android:padding="@dimen/DIMEN_20PX"
-            android:background="@color/green_6fc80e">
+            android:layout_height="@dimen/DIMEN_400PX"
+            android:background="@color/red_ff556d"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <tianxing.app.callcall.customer.widgets.RoundImageView
                 android:id="@+id/my_head_img"
                 android:layout_width="@dimen/DIMEN_150PX"
                 android:layout_height="@dimen/DIMEN_150PX"
+                android:layout_gravity="center"
                 android:padding="@dimen/DIMEN_50PX"
-                android:layout_centerVertical="true"
                 android:src="@mipmap/cam2x_normal"
-
                 zq:border_outside_color="#ba3456"
-                zq:border_thickness="1dp"
-                />
+                zq:border_thickness="1dp" />
 
             <TextView
-                android:id="@+id/my_btn_nickness"
-                android:layout_alignBottom="@id/my_head_img"
-                android:layout_toRightOf="@id/my_head_img"
-                android:layout_width="wrap_content"
-                android:textColor="@color/gray"
-                android:layout_height="wrap_content"
-                android:text="赵强"
-                android:textSize="@dimen/DIMEN_35PX"
-                />
-
-            <TextView
-                style="@style/MyTextToBtnStyle"
                 android:id="@+id/my_btn_reg"
-                android:text="注册/登录>"
-                android:layout_alignBottom="@id/my_btn_nickness"
-                />
-        </RelativeLayout>
+                style="@style/MyTextToBtnStyle"
+                android:layout_marginTop="@dimen/DIMEN_40PX"
+                android:text="请点击登录"
+                android:textColor="#fff"
+                android:textSize="20sp" />
 
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/main_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/DIMEN_10PX"
+            android:paddingTop="@dimen/DIMEN_10PX">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/my_pay"
+                    style="@style/fragment_radbtn_style"
+                    android:drawableTop="@mipmap/wait_pay"
+                    android:text="待付款" />
+
+                <tianxing.app.callcall.customer.widgets.TipNumberView
+                    style="@style/tipNumStyle"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/my_commont"
+                    style="@style/fragment_radbtn_style"
+                    android:drawableTop="@mipmap/wait_commont"
+                    android:text="待评价" />
+
+                <tianxing.app.callcall.customer.widgets.TipNumberView style="@style/tipNumStyle" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/my_nopay"
+                    style="@style/fragment_radbtn_style"
+                    android:drawableTop="@mipmap/tuikuan_pay"
+                    android:text="退款" />
+
+                <tianxing.app.callcall.customer.widgets.TipNumberView
+                    style="@style/tipNumStyle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/my_historypay"
+                    style="@style/fragment_radbtn_style"
+                    android:drawableTop="@mipmap/history_pay"
+                    android:text="历史消费" />
+
+                <tianxing.app.callcall.customer.widgets.TipNumberView
+                    style="@style/tipNumStyle" />
+
+            </RelativeLayout>
+        </RadioGroup>
+
+        <include layout="@layout/hor_line_strong" />
+
+        <RadioButton
+            android:id="@+id/discount"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/discount_icon"
+            android:text="折扣券" />
+
+        <include layout="@layout/hor_line" />
+
+        <RadioButton
+            android:id="@+id/feelling"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/felling_icon"
+            android:text="体验券" />
+
+        <include layout="@layout/hor_line_strong" />
+
+        <RadioButton
+            android:id="@+id/huoping_ing"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/huoping_ing_ic"
+            android:text="正在火拼" />
+
+        <include layout="@layout/hor_line" />
+
+        <RadioButton
+            android:id="@+id/his_huopin"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/his_huopin_ic"
+            android:text="历史火拼" />
+
+        <include layout="@layout/hor_line_strong" />
+
+        <RadioButton
+            android:id="@+id/my_like"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/my_like_ic"
+            android:text="我的收藏" />
+
+        <include layout="@layout/hor_line_strong" />
+
+        <RadioButton
+            android:id="@+id/yue_e"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/yue_icon"
+            android:text="余额" />
+
+        <include layout="@layout/hor_line" />
+
+        <RadioButton
+            android:id="@+id/chong_zhi"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/chongzhi_icon"
+            android:text="充值" />
+
+        <include layout="@layout/hor_line" />
+
+        <RadioButton
+            android:id="@+id/ti_xian"
+            style="@style/myFragmentRadionBtnStyle"
+            android:drawableLeft="@mipmap/tixian_icon"
+            android:text="提现" />
+
+        <include layout="@layout/hor_line" />
 
     </LinearLayout>
-
-
-</LinearLayout>
+</tianxing.app.callcall.customer.widgets.MyScrollView>

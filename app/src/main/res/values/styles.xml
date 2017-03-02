@@ -5,6 +5,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/gray_F9F9F9</item>
         <item name="colorAccent">@color/colorAccent</item>
+        
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+    </style>
+
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_exit</item>
     </style>
 
     <style name="MainRadionBtn">
@@ -43,6 +52,37 @@
         <item name="android:backgroundDimEnabled">true</item>
         <!--无边框-->
         <item name="android:windowFrame">@null</item>
+    </style>
+
+    <style name="myFragmentRadionBtnStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#fff</item>
+        <item name="android:drawablePadding">@dimen/DIMEN_15PX</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingBottom">@dimen/DIMEN_23PX</item>
+        <item name="android:paddingLeft">@dimen/DIMEN_20PX</item>
+        <item name="android:paddingTop">@dimen/DIMEN_23PX</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="tipNumStyle">
+        <item name="android:layout_marginRight">@dimen/DIMEN_40PX</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_width">@dimen/DIMEN_40PX</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">13</item>
+    </style>
+
+    <style name="fragment_radbtn_style" parent="MainRadionBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
