@@ -4,19 +4,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.RadioGroup;
 
-import tianxing.app.callcall.customer.activitys.BaseActivity;
 import tianxing.app.callcall.customer.fragments.ShopCarFragment;
 import tianxing.app.callcall.customer.fragments.MyFragment;
 import tianxing.app.callcall.customer.fragments.PartnerFragment;
 import tianxing.app.callcall.customer.fragments.FirstFragment;
 import tianxing.app.callcall.customer.utils.ActionBarManager;
+import tianxing.app.callcall.customer.utils.MyToastUtil;
 
 /**
  * 主界面   火拼客户端  -客户版
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Fragment[] fragments;
 
@@ -106,4 +108,23 @@ public class MainActivity extends BaseActivity {
         tx.commit();
     }
 
+
+    //间隔时间
+    private static long exectTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK &&
+                event.getAction() == KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exectTime)>2000){//第一次点击
+                MyToastUtil.ToastInLow(this,"再次点击退出程序");
+                exectTime = System.currentTimeMillis();
+            }else{
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

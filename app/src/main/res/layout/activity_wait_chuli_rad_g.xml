@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_wait_chuli_rad_g"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tianxing.app.callcall.customer.activitys.WaitChuliRadGActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:src="@mipmap/back_icon"
+            android:scaleType="centerInside"
+            android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/hor_line"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#999999"
+        android:dividerHeight="@dimen/DIMEN_2PX"
+        android:scrollbars="none"
+        />
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/shangdian_img_icon"
+        android:layout_width="@dimen/DIMEN_180PX"
+        android:layout_height="@dimen/DIMEN_180PX"
+        android:background="@color/black_474747"
+        android:src="@mipmap/icon"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/DIMEN_30PX"
+        />
+
+    <TextView
+        android:id="@+id/shangdian_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="夏威夷海鲜自助餐厅"
+        android:textSize="20sp"
+        android:textColor="@color/black_474747"
+        android:layout_toRightOf="@id/shangdian_img_icon"
+        android:layout_alignTop="@id/shangdian_img_icon"
+        />
+
+    <TextView
+        android:id="@+id/xiadan_time"
+        android:layout_below="@id/shangdian_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="下单时间:2668"
+        android:textSize="15sp"
+        android:textColor="@color/gray_898989"
+        android:layout_toRightOf="@id/shangdian_img_icon"
+        />
+
+    <TextView
+        android:id="@+id/now_price"
+        android:layout_below="@id/xiadan_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="价钱:￥232"
+        android:textSize="14sp"
+        android:textColor="@color/gray_898989"
+        android:layout_toRightOf="@id/shangdian_img_icon"
+        />
+
+    <TextView
+        android:id="@+id/txt_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="7折"
+        android:textSize="18sp"
+        android:textColor="#EECAAC"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/shangdian_title"
+        android:background="@drawable/wait_list_item_text_shape"
+        android:padding="@dimen/DIMEN_20PX"
+        android:layout_marginRight="@dimen/DIMEN_10PX"
+        />
+
+</RelativeLayout>

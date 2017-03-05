@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * 引导页
  */
-public class IndexActivity extends BaseActivity {
+public class IndexActivity extends AppCompatActivity {
 
     public static String FIRST_ENTER = "firstEnter";
 

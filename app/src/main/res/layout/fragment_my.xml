@@ -34,12 +34,12 @@
                 android:layout_marginTop="@dimen/DIMEN_40PX"
                 android:text="请点击登录"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
         <RadioGroup
-            android:id="@+id/main_radio_group"
+            android:id="@+id/my_fragment_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -177,4 +177,6 @@
         <include layout="@layout/hor_line" />
 
     </LinearLayout>
+
+
 </tianxing.app.callcall.customer.widgets.MyScrollView>

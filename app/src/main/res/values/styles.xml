@@ -60,15 +60,16 @@
         <item name="android:background">#fff</item>
         <item name="android:drawablePadding">@dimen/DIMEN_15PX</item>
         <item name="android:gravity">left|center_vertical</item>
-        <item name="android:paddingBottom">@dimen/DIMEN_23PX</item>
+        <item name="android:paddingBottom">@dimen/DIMEN_20PX</item>
         <item name="android:paddingLeft">@dimen/DIMEN_20PX</item>
-        <item name="android:paddingTop">@dimen/DIMEN_23PX</item>
+        <item name="android:paddingTop">@dimen/DIMEN_20PX</item>
         <item name="android:button">@null</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@drawable/my_fragment_text_selector</item>
     </style>
 
     <style name="tipNumStyle">
-        <item name="android:layout_marginRight">@dimen/DIMEN_40PX</item>
+        <item name="android:layout_marginRight">@dimen/DIMEN_50PX</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_width">@dimen/DIMEN_40PX</item>
@@ -82,7 +83,9 @@
     <style name="fragment_radbtn_style" parent="MainRadionBtn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:checkable">false</item>
+        <item name="android:textColor">@drawable/my_fragment_text_selector</item>
     </style>
 
 </resources>

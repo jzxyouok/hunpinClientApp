@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-import tianxing.app.callcall.customer.activitys.BaseActivity;
 import tianxing.app.callcall.customer.activitys.IndexActivity;
 import tianxing.app.callcall.customer.utils.SPUtils;
 
 /**
  * 商户端
  */
-public class StartActivity extends BaseActivity {
+public class StartActivity extends AppCompatActivity {
 
     private static int Enter_MainActivity = 1;//进入页面的标记值
 
