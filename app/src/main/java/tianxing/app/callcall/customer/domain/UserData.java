@@ -26,7 +26,6 @@ public final class UserData extends BaseEntity {
      * customerNikeName : 新注册用户
      * customerPassword : 532ff9d5a7dcc69d8e39e44b14f43bd
      */
-
     private int customerScore;
     private String customerPhoto;
     private boolean isCertification;
