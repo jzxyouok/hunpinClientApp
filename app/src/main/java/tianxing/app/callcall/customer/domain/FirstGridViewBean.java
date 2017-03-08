@@ -8,7 +8,6 @@ package tianxing.app.callcall.customer.domain;
  */
 public class FirstGridViewBean extends BaseEntity {
 
-
     private String catelogSecondImgSrc;
     private String catelogSecondName;
     private int id;

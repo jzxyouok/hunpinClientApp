@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import tianxing.app.callcall.customer.api.ClientApi;
+import tianxing.app.callcall.customer.client.ApiClient;
 import tianxing.app.callcall.customer.utils.LoginUtil;
 import tianxing.app.callcall.customer.R;
 import tianxing.app.callcall.customer.utils.ActionBarManager;
@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
 
-                case ClientApi.SEND_VERFIY_SUCCESS:
+                case ApiClient.SEND_VERFIY_SUCCESS:
                     try {
                         String str = (String) msg.obj;
                         JSONObject object = new JSONObject(str);

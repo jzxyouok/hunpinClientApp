@@ -204,6 +204,7 @@ public class WaitChuliRadGActivity extends AppCompatActivity implements View.OnC
             case R.id.ic_back:
                 finish();
                 break;
+
             default:
                 break;
         }

@@ -1,8 +1,8 @@
-package tianxing.app.callcall.customer.api;
+package tianxing.app.callcall.customer.client;
 
 import android.os.Build;
 
-import tianxing.app.callcall.customer.AppAplication;
+import tianxing.app.callcall.customer.AppContext;
 
 /**
  * Package_name:com.edu.fangqiu.gkww.client
@@ -16,7 +16,7 @@ public final class UserAgent {
     /**
      * 获取  请求Agent
      */
-    public static String getUserAgent(AppAplication appContext){
+    public static String getUserAgent(AppContext appContext){
         StringBuilder sb = new StringBuilder("fangqiu.gkww");
 
         //版本信息

@@ -1,4 +1,4 @@
-package tianxing.app.callcall.customer.api;
+package tianxing.app.callcall.customer.client;
 
 
 import com.lzy.okgo.OkGo;
@@ -6,7 +6,10 @@ import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
-import tianxing.app.callcall.customer.AppAplication;
+
+import java.util.logging.Level;
+
+import tianxing.app.callcall.customer.AppContext;
 
 /**
  * Package_name:com.edu.fangqiu.gkww.utils
@@ -46,7 +49,7 @@ public final class OkGoInstance {
     /**
      * 初始化  我们需要   使用的  网络框架   okGo
      */
-    public static void init(AppAplication appContext) {
+    public static void init(AppContext appContext) {
         //初始化
         OkGo.init(appContext);
 
@@ -71,7 +74,7 @@ public final class OkGoInstance {
         OkGo.getInstance()
                 // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
                 // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
-//                .debug("OkGo", Level.INFO, true)
+                .debug("OkGo", Level.INFO, true)
                 //如果使用默认的 60秒,以下三行也不需要传
                 .setConnectTimeout(READ_OUTTIME)  //全局的连接超时时间
                 .setReadTimeOut(WRITE_OUTTIME)     //全局的读取超时时间

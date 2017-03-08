@@ -1,12 +1,19 @@
 package tianxing.app.callcall.customer;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
+
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+
+import java.util.ArrayList;
 
 import tianxing.app.callcall.customer.fragments.ShopCarFragment;
 import tianxing.app.callcall.customer.fragments.MyFragment;
@@ -112,6 +119,26 @@ public class MainActivity extends AppCompatActivity {
     //间隔时间
     private static long exectTime = 0;
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null) {
+                //图片缓存 的路径
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(
+                        ImagePicker.EXTRA_RESULT_ITEMS);
+                Log.i("info",images.toString()+"-----------");
+//                //TODO 开始上传：
+//                ApiClient.upHeadIcImage(this,images.get(0).path,handler);
+//                //记录下 当前本地图片路径
+//                localHeadIcPath = images.get(0).path;
+            }else{
+                MyToastUtil.ToastInLow(this,"重置失败");
+            }
+        }
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK &&
@@ -127,4 +154,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import tianxing.app.callcall.customer.api.ClientApi;
+import tianxing.app.callcall.customer.client.ApiClient;
 import tianxing.app.callcall.customer.utils.LoginUtil;
 import tianxing.app.callcall.customer.R;
 import tianxing.app.callcall.customer.utils.ActionBarManager;
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch(msg.what){
-                case ClientApi.LOGIN_SUCCESS:
+                case ApiClient.LOGIN_SUCCESS:
                     try {
                         String str = (String) msg.obj;
                         JSONObject object = new JSONObject(str);
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.i("info","json解析异常");
                     }
                     break;
-                case ClientApi.LOGIN_OR_REGISTER_ERROR:
+                case ApiClient.LOGIN_OR_REGISTER_ERROR:
                     MyToastUtil.ToastIncenter(LoginActivity.this,"登录失败");
                     break;
                 default:

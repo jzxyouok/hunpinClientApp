@@ -1,4 +1,4 @@
-package tianxing.app.callcall.customer.api;
+package tianxing.app.callcall.customer.client;
 
 /**
  * Package_name:com.edu.fangqiu.gkww.client
@@ -12,20 +12,21 @@ public final class URLs {
 
     public final static String HTTP = "http://";
 
-    public static final String SERVER_IP = "www.521geek.com:8888/CallCallStore/app";
-
-    public static final String URL_SPILT = "/";
+    public static final String SERVER_IP = "120.76.240.166/CallCallStore";
 
     //发送验证码
     public static final String URL_SENDVERFIY = HTTP + SERVER_IP   +
-            URL_SPILT + "/SingleSendSms";
+             "/SingleSendSms";
     //登录
     public static final String URL_LOGIN = HTTP + SERVER_IP   +
-            URL_SPILT + "/app_loginCustomerAction";
+             "/app_loginCustomerAction";
     //注册
     public static final String URL_REGISTER =  HTTP + SERVER_IP   +
-            URL_SPILT + "/app_registerCustomerAction";
+             "/app_registerCustomerAction";
 
 
+    //首页 GridView  数据
+    public static final String FRIST_GRIDV_DATA_URL=  HTTP + SERVER_IP   +
+             "/api/customer/shophome/appGetCatelogListAction.do";
 
 }

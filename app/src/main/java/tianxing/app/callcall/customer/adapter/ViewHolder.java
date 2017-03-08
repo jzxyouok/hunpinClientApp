@@ -13,6 +13,7 @@ import java.util.List;
 
 public abstract class ViewHolder<T> {
 
+
     public abstract void findView(View itemView, int position);
     public abstract void setData(List<T> allDatas, int currPosition);
 }

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
-import tianxing.app.callcall.customer.api.ClientApi;
+import tianxing.app.callcall.customer.client.ApiClient;
 import tianxing.app.callcall.customer.domain.UserData;
 
 /**
@@ -25,11 +25,6 @@ public final class LoginUtil {
     public static boolean isLogin(Context context) {
         //获取 sp文件  内容   判断  当前是否有用户登录
         boolean isExit = (boolean) SPUtils.get_LOGIN(context,"isLogin",false);  //默认  没有登录
-
-        if(isExit){
-            MyToastUtil.ToastIncenter(context,"当前已经登录");
-        }
-
         return isExit;
     }
 
@@ -39,7 +34,7 @@ public final class LoginUtil {
     }
 
     public static void toLogin(Activity activity, String acc, String pwd,String verfiy, Handler handler, String action) {
-        ClientApi.toLogin(activity,acc,pwd,verfiy,handler,action);
+        ApiClient.toLogin(activity,acc,pwd,verfiy,handler,action);
     }
 
     /**
@@ -49,6 +44,6 @@ public final class LoginUtil {
      * @param handler
      */
     public static void sendVerfiy(Activity registerActivity, String acc, Handler handler) {
-        ClientApi.sendVerfiy(registerActivity,acc,handler);
+        ApiClient.sendVerfiy(registerActivity,acc,handler);
     }
 }

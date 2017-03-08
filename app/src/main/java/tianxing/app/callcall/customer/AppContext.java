@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import tianxing.app.callcall.customer.api.OkGoInstance;
+import tianxing.app.callcall.customer.client.OkGoInstance;
 import tianxing.app.callcall.customer.utils.ImagePickerUtils;
 import tianxing.app.callcall.customer.utils.SharePreferanceUtil;
 import tianxing.app.callcall.customer.utils.StringUtils;
@@ -18,14 +18,14 @@ import java.util.UUID;
  * Email:zhao_hero@163.com
  * Date:2016/9/13  16:58
  */
-public final class AppAplication extends Application {
+public final class AppContext extends Application {
 
-    public static  AppAplication instance;
+    public static AppContext instance;
     private static Context context;
 
     private static final String CONFIG_UNIQUEID = "unique_id";
 
-    public AppAplication(){
+    public AppContext(){
         if(null == instance){
             instance = this;
         }
@@ -39,7 +39,6 @@ public final class AppAplication extends Application {
         //初始化   网络连接  工具类
         OkGoInstance.getInstance().init(this);
         ImagePickerUtils.getImpickerUtils().initImagePicker(this);
-
     }
 
     //内存  占用较高时    调用垃圾回收机制
