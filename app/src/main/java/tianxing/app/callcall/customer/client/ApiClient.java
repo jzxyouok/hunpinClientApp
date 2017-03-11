@@ -7,18 +7,26 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.callback.StringCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import tianxing.app.callcall.customer.configs.URLs;
+import tianxing.app.callcall.customer.domain.DataBean;
 import tianxing.app.callcall.customer.domain.FirstGridViewBean;
+import tianxing.app.callcall.customer.domain.FirstRecycleBean;
+import tianxing.app.callcall.customer.domain.OKDataResponse;
+import tianxing.app.callcall.customer.fragments.FirstFragment;
 import tianxing.app.callcall.customer.utils.DataUtils;
 
 
@@ -132,9 +140,9 @@ public class ApiClient {
         return map;
     }
 
+    public static final int First_Fragment_GV_GET_Data_Success = 0x92;
+    public static final int First_Fragment_RV_GET_Data_Success = 0x90;
 
-
-    public static final int First_Fragment_GET_Data_Success = 0x92;
     /**
      * 获取 首页  GridView  数据：
      * @param firstFragment
@@ -144,6 +152,7 @@ public class ApiClient {
         //这是 我用的第三方：  okgo:
         OkGo.get(URLs.FRIST_GRIDV_DATA_URL)
                 .tag(firstFragment)
+                .cacheMode(CacheMode.NO_CACHE)
                 //传入我需要  解析的对象
                 .execute(new StringCallback() {
                              @Override
@@ -157,7 +166,7 @@ public class ApiClient {
 
                                          if (beanAll.size()!=0){
                                              Message msg = new Message();
-                                             msg.what = First_Fragment_GET_Data_Success;
+                                             msg.what = First_Fragment_GV_GET_Data_Success;
                                              msg.obj = beanAll;
                                              handler.sendMessage(msg);
                                          }
@@ -166,13 +175,41 @@ public class ApiClient {
                                      e.printStackTrace();
                                  }
                              }
-
                              @Override
                              public void onError(Call call, Response response, Exception e) {
-                                 Log.i("info",e.toString());
                                  super.onError(call, response, e);
                              }
                          }
                 );
+    }
+
+    public static void getRecycleViewData(final FirstFragment firstFragment, final Handler handler) {
+        //这是 我用的第三方：  okgo:
+        OkGo.get(URLs.FIRST_RECYCLEVIEW_DATA)
+                .tag(firstFragment)
+                .cacheMode(CacheMode.NO_CACHE)
+                //传入我需要  解析的对象
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if (jsonObject.getBoolean("isOK")) {
+                                JSONArray array = jsonObject.getJSONArray("data");
+
+                                List<FirstRecycleBean> beanAll = DataUtils.getFirstFragRVData(array);
+                                Log.i("info",beanAll.toString());
+                                if (beanAll.size()!=0){
+                                    Message msg = new Message();
+                                    msg.what = First_Fragment_RV_GET_Data_Success;
+                                    msg.obj = beanAll;
+                                    handler.sendMessage(msg);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }
