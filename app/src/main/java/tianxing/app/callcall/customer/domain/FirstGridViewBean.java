@@ -7,12 +7,18 @@ package tianxing.app.callcall.customer.domain;
  * Date:2017/02/28  00:20
  */
 public class FirstGridViewBean extends BaseEntity {
-
-    private String catelogSecondImgSrc;
-    private String catelogSecondName;
+    /**
+     * id : 1
+     * catelogFirstId : 1
+     * catelogSecondImgSrc : data/catelog/happy/happy_default.png
+     * catelogSecondId : 1
+     * catelogSecondName : 火锅
+     */
     private int id;
     private int catelogFirstId;
+    private String catelogSecondImgSrc;
     private int catelogSecondId;
+    private String catelogSecondName;
 
     public int getId() {
         return id;
@@ -30,8 +36,20 @@ public class FirstGridViewBean extends BaseEntity {
         this.catelogFirstId = catelogFirstId;
     }
 
+    public String getCatelogSecondImgSrc() {
+        return catelogSecondImgSrc;
+    }
+
+    public void setCatelogSecondImgSrc(String catelogSecondImgSrc) {
+        this.catelogSecondImgSrc = catelogSecondImgSrc;
+    }
+
     public int getCatelogSecondId() {
         return catelogSecondId;
+    }
+
+    public void setCatelogSecondId(int catelogSecondId) {
+        this.catelogSecondId = catelogSecondId;
     }
 
     public String getCatelogSecondName() {
@@ -42,26 +60,14 @@ public class FirstGridViewBean extends BaseEntity {
         this.catelogSecondName = catelogSecondName;
     }
 
-    public String getCatelogSecondImgSrc() {
-        return catelogSecondImgSrc;
-    }
-
-    public void setCatelogSecondImgSrc(String catelogSecondImgSrc) {
-        this.catelogSecondImgSrc = catelogSecondImgSrc;
-    }
-
-    public void setCatelogSecondId(int catelogSecondId) {
-        this.catelogSecondId = catelogSecondId;
-    }
-
     @Override
     public String toString() {
-        return "GVCategory{" +
-                "catelogSecondImgSrc='" + catelogSecondImgSrc + '\'' +
-                ", catelogSecondName='" + catelogSecondName + '\'' +
-                ", id=" + id +
+        return "FirstGridViewBean{" +
+                "id=" + id +
                 ", catelogFirstId=" + catelogFirstId +
+                ", catelogSecondImgSrc='" + catelogSecondImgSrc + '\'' +
                 ", catelogSecondId=" + catelogSecondId +
+                ", catelogSecondName='" + catelogSecondName + '\'' +
                 '}';
     }
 }

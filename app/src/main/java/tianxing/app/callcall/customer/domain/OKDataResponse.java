@@ -13,13 +13,15 @@ import tianxing.app.callcall.customer.domain.DataBean;
  */
 public class OKDataResponse<T> extends BaseEntity {
 
-    public String other;//消息
+    private static final long serialVersionUID = 5213230387175987834L;
 
-    public boolean isOk; //状态码
+    public int resultCode;
 
     public String resultMessage;  //提示信息
 
-    public int resultCode;
+    public String other;//消息
+
+    public boolean isOk; //状态码
 
     public T data;  //数据
 
